@@ -1,0 +1,27 @@
+// enable carbon UI shell
+$feature-flags: (
+  ui-shell: true,
+);
+
+// disable IBM fonts until we can override patternfly
+$css--font-face: false;
+$css--plex: false;
+
+// don't break patternfly styling
+$css--body: false;
+$css--reset: false;
+$css--default-type: false;
+
+// Use the white theme
+@import '~@carbon/themes/scss/themes';
+$carbon--theme: $carbon--theme--white;
+
+@include carbon--theme();
+
+@import '~@carbon/charts/styles.css';
+@import '~carbon-components/scss/globals/scss/styles.scss';
+
+// ignored by patternfly, but sets the right base for carbon rem units
+html {
+  font-size: 100%;
+}

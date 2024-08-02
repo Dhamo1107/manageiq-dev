@@ -1,0 +1,11 @@
+Style/GlobalVars:
+  AllowedVariables:
+  # Loggers
+  - $log
+  - $azure_log
+Naming/AccessorMethodName:
+  Exclude:
+    - app/models/manageiq/providers/azure/cloud_manager/refresh_parser.rb
+    - app/models/manageiq/providers/azure/network_manager/refresh_parser.rb
+Lint/RescueException:
+  Enabled: false

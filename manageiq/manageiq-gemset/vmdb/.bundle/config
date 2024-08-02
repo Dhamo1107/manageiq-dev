@@ -1,0 +1,6 @@
+---
+BUNDLE_BUILD__RUGGED: "--with-ssh"
+BUNDLE_WITH: "appliance:qpid_proton:systemd"
+BUNDLE_WITHOUT: "development:test"
+BUNDLE_RETRY: "3"
+BUNDLE_JOBS: "4"

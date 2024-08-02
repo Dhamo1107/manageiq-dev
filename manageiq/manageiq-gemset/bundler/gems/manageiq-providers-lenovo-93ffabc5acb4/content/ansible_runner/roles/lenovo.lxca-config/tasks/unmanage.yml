@@ -1,0 +1,40 @@
+---
+- block:
+  - name: Unmanaging given endpoint
+    pylxca_module:
+      login_user: "{{ lxca_user }}"
+      login_password: "{{ lxca_password }}"
+      auth_url: "{{ lxca_url }}"
+      endpoint_ip: "{{ endpoint_ip }}"
+      force: "{{ force }}"
+      command_options: unmanage
+    register: rslt_job
+  - debug:
+      var: rslt_job
+  - name: Check submission of Unmanage job
+    assert:
+      that:
+        - " 'Success' in rslt_job.msg"
+
+  - name: Polling for Status of Unmanage Operation
+    pylxca_module:
+      command_options: tasks
+      login_user: "{{ lxca_user }}"
+      login_password: "{{ lxca_password }}"
+      auth_url: "{{ lxca_url }}"
+      id: "{{ rslt_job.result.unmanageRequestResponse.jobID }}"
+    register: result
+    until: result.result.TaskList[0].percentage == 100
+    retries: 20
+    delay: 15
+
+  - debug:
+      var: result.result.TaskList[0].status
+
+  - name: Check unmanage job completion
+    assert:
+      that:
+        - " 'Complete' in result.result.TaskList[0].status"
+
+  tags:
+    unmanage

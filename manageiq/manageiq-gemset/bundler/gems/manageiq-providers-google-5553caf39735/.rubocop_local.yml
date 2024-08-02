@@ -1,0 +1,4 @@
+Style/GlobalVars:
+  AllowedVariables:
+  # Loggers
+  - $gce_log

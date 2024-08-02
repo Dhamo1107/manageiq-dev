@@ -1,0 +1,53 @@
+LoadModule auth_openidc_module modules/mod_auth_openidc.so
+ServerName https://<%= miq_appliance %>
+LogLevel   warn
+
+OIDCProviderMetadataURL            <%= oidc_provider_metadata_url %>
+OIDCCLientID                       <%= oidc_client_id %>
+OIDCClientSecret                   <%= oidc_client_secret %>
+OIDCRedirectURI                    https://<%= miq_appliance %>/oidc_login/redirect_uri
+OIDCCryptoPassphrase               sp-cookie
+OIDCOAuthRemoteUserClaim           username
+OIDCCacheShmEntrySizeMax           65536
+OIDCOAuthClientID                  <%= oidc_client_id %>
+OIDCOAuthClientSecret              <%= oidc_client_secret %>
+OIDCOAuthIntrospectionEndpoint     <%= oidc_introspection_endpoint %>
+OIDCOAuthIntrospectionEndpointAuth client_secret_basic
+OIDCCookieSameSite                 On
+
+<Location /oidc_login>
+  AuthType  openid-connect
+  Require   valid-user
+  FileETag  None
+  Header    Set Cache-Control "max-age=0, no-store, no-cache, must-revalidate"
+  Header    Set Pragma "no-cache"
+  Header    Unset ETag
+</Location>
+
+<Location /ui/service/oidc_login>
+  AuthType  openid-connect
+  Require   valid-user
+  FileETag  None
+  Header    Set Cache-Control "max-age=0, no-store, no-cache, must-revalidate"
+  Header    Set Pragma "no-cache"
+  Header    Set Set-Cookie "miq_oidc_access_token=%{OIDC_access_token}e; Max-Age=10; Path=/ui/service"
+  Header    Unset ETag
+</Location>
+
+<LocationMatch ^/api(?!\/(v[\d\.]+\/)?product_info$)>
+  SetEnvIf Authorization '^Basic +YWRtaW46'     let_admin_in
+  SetEnvIf X-Auth-Token  '^.+$'                 let_api_token_in
+  SetEnvIf X-MIQ-Token   '^.+$'                 let_sys_token_in
+  SetEnvIf X-CSRF-Token  '^.+$'                 let_csrf_token_in
+
+  AuthType     oauth20
+  AuthName     "External Authentication (oidc) for API"
+
+  Require   valid-user
+  Order          Allow,Deny
+  Allow from env=let_admin_in
+  Allow from env=let_api_token_in
+  Allow from env=let_sys_token_in
+  Allow from env=let_csrf_token_in
+  Satisfy Any
+</LocationMatch>

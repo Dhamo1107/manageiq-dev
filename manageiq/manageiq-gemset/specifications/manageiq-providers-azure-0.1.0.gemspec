@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-azure-92bc59b93230/manageiq-providers-azure.gemspec

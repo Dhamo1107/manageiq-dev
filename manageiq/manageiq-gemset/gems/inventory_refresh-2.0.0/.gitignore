@@ -1,0 +1,20 @@
+/.bundle/
+/.idea/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+/Gemfile.lock
+
+# ignore included plugins in bundler.d
+bundler.d/*
+
+# rspec failure tracking
+.rspec_status
+
+# generated rubocop file
+.rubocop-https*

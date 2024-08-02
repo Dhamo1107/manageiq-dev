@@ -1,0 +1,410 @@
+#code-section {
+  .bx--form-item {
+    margin-bottom: 15px;
+  }
+}
+
+#dateSelectors {
+  display: flex;
+  gap: 2%;
+}
+
+#managementEvents {
+  display: flex;
+  gap: 2%;
+  flex-direction: row;
+
+  .bx--multi-select__wrapper.bx--list-box__wrapper {
+    flex-grow: 1;
+  }
+}
+
+#policyEvents {
+  .bx--multi-select__wrapper.bx--list-box__wrapper {
+    margin-bottom: 2rem;
+  }
+}
+
+#dual-list-sub-form-catalog {
+  #move-right, #move-all-right, #move-all-left, #move-left {
+    svg {
+      position: unset;
+    }
+
+    max-width: 100%;
+  }
+}
+
+.form-react {
+  .bx--grid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .bx--form-item {
+    margin-bottom: 2rem;
+  }
+
+  .bx--btn-set {
+    margin-bottom: 48px;
+
+    .bx--btn--secondary {
+      margin-left: 10px;
+    }
+  }
+}
+
+#CheckboxDays,
+#CheckboxHours {
+  margin-bottom: 0;
+
+  .bx--fieldset {
+    display: inline-flex;
+    margin-bottom: 0;
+
+    .bx--checkbox-label-text {
+      padding-left: 2px;
+      padding-right: 20px;
+    }
+  }
+}
+
+#hoursWarning {
+  color: #da1e28;
+  font-size: 14px;
+}
+
+#dateWarning {
+  color: #da1e28;
+  font-size: 14px;
+}
+
+#dateInfo {
+  margin-top: -25px;
+  margin-bottom: 25px;
+}
+
+.bx--fieldset {
+  legend.bx--label {
+    font-size: 16px;
+  }
+}
+
+#file_section {
+  .file-upload {
+    .file-upload-input {
+      display: none;
+    }
+
+    .file-upload-label {
+      margin: 0;
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.29;
+      letter-spacing: 0.16px;
+      outline: 2px solid transparent;
+      outline-offset: -2px;
+      width: 90%;
+      height: 2.5rem;
+      padding: 0 1rem;
+      color: #161616;
+      background-color: #f4f4f4;
+      border: 10px solid #f4f4f4;
+      border-bottom: 1px solid #8d8d8d;
+    }
+
+    .file-button {
+      color: #ffffff;
+      background-color: #0f62fe;
+      font-size: 0.875rem;
+      display: inline-block;
+      position: absolute;
+      height: 2.5rem;
+      width: 10%;
+      min-width: fit-content;
+      text-align: center;
+      border: 10px solid #0f62fe;
+
+      .file-button-label {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        color: #ffffff;
+        background-color: #0f62fe;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 1px;
+        padding: 0;
+        border: 0;
+        background-image: none;
+      }
+    }
+
+    .file-button:hover {
+      background-color: $hover-primary;
+      border-color: $hover-primary;
+
+      .file-button-label {
+        background-color: $hover-primary;
+      }
+    }
+
+    .file-button:active {
+      background-color: $active-primary;
+      border-color: $active-primary;
+
+      .file-button-label {
+        background-color: $active-primary;
+      }
+    }
+
+    .file-button:focus {
+      outline: 1px solid #ffffff;
+      outline-offset: -3px;
+    }
+  }
+}
+
+#subform-4,
+#alert-profile {
+  #move-right,
+  #move-all-right,
+  #move-all-left,
+  #move-left {
+    white-space: nowrap;
+    text-align: center;
+    box-sizing: content-box;
+    width: 50%;
+  }
+}
+
+#edit_section {
+  .edit-div {
+    position: relative;
+
+    .edit-image {
+      margin-right: 2px;
+      max-width: 125px;
+      max-height: 125px;
+      object-fit: contain;
+    }
+
+    .edit-button {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}
+
+.tasks-form {
+  form > div {
+    margin-bottom: 32px;
+  }
+
+  #TaskStatus {
+    margin-bottom: 0;
+
+    .bx--fieldset {
+      display: inline-flex;
+
+      .bx--form-item {
+        .bx--checkbox-label-text {
+          #icon {
+            span {
+              padding-left: 5px;
+            }
+          }
+
+          padding-left: 2px;
+          padding-right: 20px;
+        }
+      }
+    }
+  }
+
+  .custom-button-wrapper {
+    margin-top: 10px;
+
+    #submit {
+      margin-right: 8px;
+    }
+
+    #reset {
+      margin-right: 8px;
+    }
+  }
+}
+
+.service-request-form {
+  form > div {
+    margin-bottom: 32px;
+  }
+
+  #approval_state {
+    margin-bottom: 0;
+
+    .bx--fieldset {
+      display: inline-flex;
+
+      .bx--form-item {
+        .bx--checkbox-label-text {
+          #icon {
+            span {
+              padding-left: 5px;
+            }
+          }
+
+          padding-left: 2px;
+          padding-right: 20px;
+        }
+      }
+    }
+  }
+
+  .custom-button-wrapper {
+    margin-top: 10px;
+
+    #submit {
+      margin-right: 8px;
+    }
+
+    #reset {
+      margin-right: 8px;
+    }
+  }
+}
+
+.ddorg__carbon-dual-list-body {
+  .bx--structured-list-td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.buttonWrapper-0-2-7 {
+  .bx--btn--primary {
+    width: 150px;
+    padding-right: 20px;
+  }
+}
+
+.dualListBody-0-2-6 {
+  .bx--structured-list-td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.loadingSpinner {
+  margin-left: 15rem;
+}
+
+#provider-modal {
+  .bx--modal-container {
+    .bx--modal-footer {
+      .modal-pull-right {
+        display: inline-flex;
+
+        .Cancel {
+          background-color: #393939;
+          width: 200px;
+        }
+
+        .Delete {
+          background-color: #da1e28;
+        }
+      }
+    }
+  }
+}
+
+#firewall_rules {
+  .bx--form-item {
+    display: inline-flex;
+    margin-right: 2rem;
+  }
+
+  .remove-0-2-8 {
+    margin-top: 2.2rem;
+    margin-bottom: 100px;
+  }
+}
+
+#generic-objects-field-array-methods,
+#generic-objects-field-array-attributes {
+  .bx--form-item {
+    display: inline-flex;
+    margin-right: 2rem;
+    width: 400px;
+  }
+
+  .remove-0-2-8 {
+    margin-top: 2.2rem;
+  }
+}
+
+#generic-objects-field-array-associations {
+  .bx--list-box__wrapper {
+    width: 400px;
+    display: inline-flex;
+
+    .bx--combo-box {
+      margin-top: 1.5rem;
+      margin-left: -2rem;
+    }
+  }
+
+  .bx--form-item {
+    display: inline-flex;
+    margin-right: 2rem;
+    width: 400px;
+  }
+
+  .remove-0-2-8 {
+    margin-top: 2.2rem;
+    margin-left: 32px;
+  }
+}
+
+#addButtonProps.addButtonProps {
+  display: flex;
+  padding-right: 30px;
+}
+
+#removeButtonProps.removeButtonProps {
+  display: flex;
+  padding-right: 30px;
+}
+
+.bx--tabs--scrollable .bx--tabs--scrollable__nav-link {
+  min-width: 10rem;
+  width: fit-content;
+}
+
+.miq-fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+
+  .miq-fieldset-legend {
+    font-size: 14px;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    width: 100%;
+    font-weight: 400;
+    color: #000;
+    background: inherit;
+
+    &.legend-search {
+      color: #FFF;
+    }
+  }
+
+  .miq-fieldset-content {
+    display: flex;
+    flex-direction: row;
+    margin-top: -23px;
+    flex-grow: 1;
+  }
+}

@@ -1,0 +1,5 @@
+#!/usr/bin/ruby
+# frozen_string_literal: true
+
+require "bootsnap/cli"
+exit Bootsnap::CLI.new(ARGV).run

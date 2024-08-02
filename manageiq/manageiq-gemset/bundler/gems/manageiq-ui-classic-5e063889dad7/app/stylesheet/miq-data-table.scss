@@ -1,0 +1,354 @@
+.tenant-quota-data-table {
+  .miq-data-table {
+    margin-bottom: 32px;
+  }
+
+  .bx--btn-set {
+    margin-bottom: 48px;
+  }
+
+  .bx--data-table thead tr :first-child{
+    padding-right: 2rem;
+  }
+
+  .bx--form-item {
+    .bx--front-line, .bx--label, .bx--toggle-input {
+      display: none;
+    }
+
+    .bx--toggle-input__label {
+      margin-bottom: 0px;
+
+      .bx--toggle__switch {
+        margin-top: 0px;
+      }
+    }
+  }
+}
+
+.timeline-data-table {
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+
+.miq-data-table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .bx--data-table-content {
+    overflow-x: visible;
+  }
+
+  thead tr th {
+    &.bx--table-column-checkbox {
+      min-width: 45px;
+      vertical-align: middle;
+    }
+
+    .bx--table-header-label {
+      line-height: 20px;
+      white-space: nowrap;
+    }
+  }
+
+  tbody tr {
+    &.clickable-row {
+      cursor: pointer;
+    }
+
+    .cell {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      &.vertical_align_top {
+        vertical-align: top;
+        align-items: flex-start;
+      }
+
+      &.truncate_cell {
+        max-width: 700px;
+        min-width: 150px;
+      }
+
+      .array_list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .list_row {
+          padding: 0.5rem 0;
+        }
+      }
+
+      .image {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        margin-top: 2px;
+      }
+
+      .icon {
+        min-width: 30px;
+        max-height: 30px;
+        height: 30px;
+        max-height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: -2px;
+
+        &.styled_icon {
+          min-width: 20px;
+          height: 20px;
+          justify-content: center;
+          margin-right: 5px;
+          margin-top: 2px;
+          font-size: 14px;
+        }
+
+        &.styled_icon_margin {
+          margin-top: 9px;
+        }
+      }
+
+      .icon.fa-ruby {
+        color: #cc0000 !important;
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+      }
+
+      button {
+        padding: 0;
+        margin: 5px 0;
+
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          padding: 0 8px;
+          min-width: 100px;
+        }
+      }
+    }
+
+    td {
+      vertical-align: top;
+      padding-top: 10px;
+    }
+
+    td.no_text {
+      width: 50px;
+    }
+
+    td .bx--front-line {
+      width: 100%;
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: 3px;
+
+      &.white_space_normal {
+        white-space: normal !important;
+        margin-bottom: 10px;
+      }
+
+      &.truncate_longer_text {
+        max-height: 300px;
+        display: -webkit-box;
+        max-width: 200px;
+        -webkit-line-clamp: 15;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+#iso_datastore_details_div {
+  tbody tr {
+    .cell {
+      &.truncate_cell {
+        max-width: 1000px;
+      }
+    }
+  }
+}
+
+.chargeback-rate table tbody tr td {
+  vertical-align: top !important;
+}
+
+.time-profile-reports {
+  padding-bottom: 20px;
+}
+
+.report-data-table {
+  table tr td {
+    padding: 0 !important;
+
+    .cell {
+      min-height: 47px;
+      padding-left: 10px;
+    }
+  }
+}
+
+.prov-vm-grid-data-table {
+  table {
+    tr {
+      td, th {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+.requests-table {
+  .miq-data-table {
+    .bx--data-table--sticky-header thead, .bx--data-table--sticky-header tbody, .bx--data-table--sticky-header tr, .bx--data-table--sticky-header th, .bx--data-table--sticky-header td {
+      display: revert;
+    }
+
+    .clickable-row {
+      td:nth-child(3) {
+        .bx--front-line {
+          white-space: pre;
+        }
+      }
+      td {
+        vertical-align: inherit;
+      }
+
+      vertical-align: top;
+    }
+
+    thead tr th {  
+      vertical-align: middle;
+
+      .bx--table-header-label {
+        min-width: fit-content;
+      }
+    }
+  }
+}
+
+.provision-instance-container {
+  display: flex;
+  flex-direction: column;
+
+  .provision-instance-list {
+    height: calc(100vh - 255px);
+    overflow: auto;
+  }
+  .provision-instance-actions {
+
+    #pre_prov_form_buttons_div {
+      display: flex;
+      justify-content: end;
+    }
+  }
+
+}
+
+table.miq_preview {
+  tbody tr {
+    td.group {
+      background: lightgray;
+      font-weight: bold;
+      &:hover {
+        background: lightgray;
+      }
+    }
+
+    td.group_spacer {
+      background: #FFF;
+      &:hover {
+        background: #FFF;
+      }
+    }
+  }
+}
+
+.settings-company-tags-list, .settings-company-categories-list {
+  margin-bottom: 20px;
+
+  table thead tr th:last-child{
+    width: 135px;
+  }
+}
+
+.reconfigure-add-button {
+  margin-bottom: 10px;
+}
+
+.disk-table {
+  .bx--form-item{
+    margin-bottom: 0px !important;
+  }
+}
+
+.header-button {
+  width: 100px !important;
+}
+
+.reconfigure-form {
+  .disk-table-list {
+    .bx--table-header-label {
+      white-space: normal !important;
+    }
+  }
+  .bx--btn--ghost:hover, .bx--btn--ghost:active{
+    background-color: transparent !important;
+  }
+  .bx--btn--ghost:focus {
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+  .bx--btn--ghost span {
+    min-width: 50px !important;
+  }
+}
+.catalogs_form {
+
+  input[type="text"] {
+    width: 220px;
+  }
+
+  .no-padding{
+    padding: 0;
+  }
+
+  .long_text {
+    width: 100% !important;
+  }
+
+  .entry_point_selector {
+    padding: 3px;
+
+    .entry_point_text, .entry_point_button {
+      border-right: 0;
+    }
+
+    span.input-group-addon{
+      visibility: hidden;
+    }
+  }
+  .workflow_modal_wrapper {
+    min-height: 26px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .workflows-entry-point-modal-body {
+    .miq-data-table {
+      margin-top: 0px;
+    }
+  }
+}
+

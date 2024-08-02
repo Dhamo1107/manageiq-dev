@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-openshift-bcd72da3d117/manageiq-providers-openshift.gemspec

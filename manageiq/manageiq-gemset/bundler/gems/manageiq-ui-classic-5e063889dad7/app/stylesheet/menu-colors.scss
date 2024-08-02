@@ -1,0 +1,115 @@
+$rail-primary-bg: $ui-background; // carbon--gray-90
+$rail-secondary-bg: $ui-01; // carbon--gray-80
+
+$row-active-primary-bg: $hover-row; // carbon--gray-80
+$row-active-secondary-bg: $hover-secondary; // carbon--gray-60
+
+$row-fg-text: $text-01; // carbon--gray-10
+$row-fg-icon: $icon-01; // carbon--gray-10
+
+$user-fg: $text-05; // $carbon--gray-50
+
+$divider-fg: $disabled-02; // $carbon--gray-60;
+
+$find-bg: $carbon--gray-80;
+$find-placeholder-fg: $carbon--gray-50;
+
+$clear-btn-outline: $interactive-03;
+$clear-btn-fill: $ui-05;
+$clear-btn-background: $ui-01;
+$clear-btn-hover-background: $hover-ui;
+$clear-btn-active: $ui-02;
+
+// unused, theme default
+// $row-selected-border: $carbon--blue-60;
+
+.bx--side-nav {
+  background-color: $rail-primary-bg;
+
+  .bx--side-nav__link.force-hover,
+  .bx--side-nav__link:hover,
+  .bx--side-nav__link.bx--side-nav__link--current {
+    background-color: $row-active-primary-bg;
+  }
+}
+
+.bx--side-nav.secondary {
+  background-color: $rail-secondary-bg;
+
+  .bx--side-nav__item--active > .bx--side-nav__submenu,
+  .bx--side-nav__link.bx--side-nav__link--current,
+  .bx--side-nav__link.force-hover,
+  .bx--side-nav__link:hover,
+  .bx--side-nav__submenu[aria-expanded=false]:hover {
+    background-color: $row-active-secondary-bg;
+  }
+}
+
+.bx--side-nav__link-text,
+.bx--side-nav__submenu-title,
+li.menu-group {
+  color: $row-fg-text;
+}
+
+.bx--side-nav__icon > svg,
+.menu-collapse-button > svg,
+.menu-group svg,
+.menu-search > svg,
+.menu-user svg {
+  fill: $row-fg-icon;
+}
+
+.bx--side-nav__icon > i {
+  color: $row-fg-icon;
+}
+
+.bx--side-nav__hr {
+  color: $divider-fg;
+}
+
+.menu-user {
+  color: $user-fg;
+}
+
+.menu-search {
+  .bx--search-input {
+    background-color: $find-bg;
+    color: $row-fg-text;
+
+    &:focus ~ .bx--search-close:hover {
+      outline: 2px solid $clear-btn-outline;
+      outline-offset: -2px;
+    }
+  }
+
+  button.bx--search-close {
+    fill: $clear-btn-fill;
+
+    &::before {
+      background-color: $clear-btn-background;
+    }
+
+    &:hover {
+      background: $clear-btn-hover-background;
+    }
+
+    &:focus {
+      outline: 2px solid $clear-btn-outline;
+      outline-offset: -2px;
+
+      &::before {
+        background-color: $clear-btn-outline;
+      }
+    }
+
+    &:active {
+      outline: 2px solid $clear-btn-outline;
+      outline-offset: -2px;
+      background-color: $clear-btn-active;
+    }
+  }
+
+  .bx--label {
+    color: $find-placeholder-fg;
+  }
+}

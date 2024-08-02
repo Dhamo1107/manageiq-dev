@@ -1,0 +1,52 @@
+language: ruby
+cache: bundler
+sudo: required
+dist: focal
+
+rvm:
+- 2.5.1
+- 2.6.1
+
+notifications:
+  email: false
+
+matrix:
+  fast_finish: true
+
+before_install:
+  - git fetch --tags
+  - sudo apt-get update
+  - sudo apt-get install python
+  - nvm install --lts
+  - nvm use node
+  - gem install bundler:2.1.4
+
+install:
+  - bundle _2.1.4_ install
+
+script:
+- bundle exec rake
+
+before_deploy:
+ - pip install bump2version
+ - npm install -g semantic-release
+ - npm install -g @semantic-release/changelog
+ - npm install -g @semantic-release/exec
+ - npm install -g @semantic-release/git
+ - npm install -g @semantic-release/github
+ - npm install -g @semantic-release/commit-analyzer
+
+deploy:
+ - provider: script
+   script: npx semantic-release
+   skip_cleanup: true
+   on:
+     branch: master
+     rvm: 2.5.1
+
+ - provider: rubygems
+   api_key: $RUBYGEMS_API_KEY
+   gem: ibm_vpc
+   on:
+     rvm: '2.5.1'
+     branch: master

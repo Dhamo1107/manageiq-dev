@@ -1,0 +1,60 @@
+---
+:ems:
+  :ems_azure_stack:
+    # How long before giving up on establishing connection with Azure Stack API URL.
+    :api_connection_timeout: 5.seconds
+
+    :blacklisted_event_names: []
+    :event_handling:
+      :event_groups:
+        :update:
+          :critical:
+            - /^Administrative_Microsoft.(Compute|Resources)_.+_write_(Succeeded|Failed)$/
+          :detail:
+            - /^Administrative_Microsoft.(Compute|Resources)_.+_write_.+$/
+        :deletion:
+          :critical:
+            - /^Administrative_Microsoft.(Compute|Resources)_.+_delete_(Succeeded|Failed)$/
+          :detail:
+            - /^Administrative_Microsoft.(Compute|Resources)_.+_delete_.+$/
+        :power:
+          :critical:
+            - /^Administrative_Microsoft.(Compute|Resources)_.+_(restart|start|deallocate)_(Succeeded|Failed)$/
+          :detail:
+            - /^Administrative_Microsoft.(Compute|Resources)_.+_(restart|start|deallocate)_.+$/
+        :status:
+          :critical:
+            - /^(ServiceHealth|ResourceHealth|Alert|AutoScale|Security|Recommendation)_.+$/
+        :storage:
+          :critical:
+            - /^Administrative_Microsoft.Storage_.+$/
+        :network:
+          :critical:
+            - /^Administrative_Microsoft.Network_.+$/
+
+:http_proxy:
+  :azure_stack:
+    :host:
+    :password:
+    :port:
+    :user:
+
+:ems_refresh:
+  :azure_stack:
+    :allow_targeted_refresh: true
+  :azure_stack_network:
+    :allow_targeted_refresh: true
+
+:log:
+  :level_azure_stack: info
+
+:workers:
+  :worker_base:
+    :event_catcher:
+      :event_catcher_azure_stack:
+        :poll: 20.seconds
+    :queue_worker_base:
+      :ems_refresh_worker:
+        :ems_refresh_worker_azure_stack: {}
+        :ems_refresh_worker_azure_stack_network: {}
+

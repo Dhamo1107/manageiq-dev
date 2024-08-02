@@ -1,0 +1,79 @@
+---
+:ems:
+  :ems_kubernetes:
+    :ems_monitoring:
+      :alerts_collection:
+        :open_timeout: 10.seconds
+        :timeout: 20.seconds
+    :miq_namespace: management-infra
+    :image_inspector_registry: docker.io
+    :image_inspector_repository: openshift/image-inspector
+    :image_inspector_cve_url:
+    :blacklisted_event_names: []
+    :event_handling:
+      :event_groups:
+        :addition:
+          :critical:
+            - CONTAINER_CREATED
+            - REPLICATOR_SUCCESSFULCREATE
+            - REPLICATOR_FAILEDCREATE
+        :status:
+          :critical:
+            - NODE_NODEREADY
+            - NODE_NODENOTREADY
+            - POD_FAILEDVALIDATION
+            - POD_DEADLINEEXCEEDED
+            - POD_INSUFFICIENTFREECPU
+            - POD_NODESELECTORMISMATCHING
+            - POD_SCHEDULED
+            - POD_FAILEDSCHEDULING
+            - CONTAINER_UNHEALTHY
+            - CONTAINER_KILLING
+            - CONTAINER_STARTED
+            - CONTAINER_STOPPED
+        :power:
+          :critical:
+            - NODE_REBOOTED
+            - NODE_NODESCHEDULABLE
+            - NODE_NODENOTSCHEDULABLE
+        :storage:
+          :critical:
+            - NODE_FAILEDMOUNT
+            - NODE_INVALIDDISKCAPACITY
+            - POD_OUTOFDISK
+            - POD_INSUFFICIENTFREEMEMORY
+        :network:
+          :critical:
+            - POD_HOSTPORTCONFLICT
+    :open_timeout: 60.seconds
+    :read_timeout: 60.seconds
+:http_proxy:
+  :kubernetes:
+    :host:
+    :password:
+    :port:
+    :user:
+:ems_refresh:
+  :kubernetes:
+    :refresh_interval: 15.minutes
+    :streaming_refresh: true
+    :chunk_size: 1_000
+    :inventory_collections:
+      :saver_strategy: batch
+:workers:
+  :worker_base:
+    :event_catcher:
+      :event_catcher_kubernetes:
+        :poll: 1.seconds
+      :event_catcher_prometheus:
+        :poll: 20.seconds
+    :queue_worker_base:
+        :ems_metrics_collector_worker:
+          :ems_metrics_collector_worker_kubernetes:
+            :metrics_port: 5000
+            :metrics_path: "/hawkular/metrics"
+            :prometheus_open_timeout: 5
+            :prometheus_request_timeout: 30
+            :hawkular_force_legacy: true
+        :ems_refresh_worker:
+          :ems_refresh_worker_kubernetes: {}

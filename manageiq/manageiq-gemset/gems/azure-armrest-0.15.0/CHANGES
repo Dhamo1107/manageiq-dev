@@ -1,0 +1,572 @@
+= 0.15.0 - 2-Aug-2022
+* Update parallel gem to v1.22
+
+= 0.14.0 - 25-May-2022
+* Fix undefined method delegate (#418)
+* Remove the deprecated `Microsoft Cloud Deutschland` environment (#417)
+* Fix issue with ActiveSupport 7+ (#419)
+
+= 0.13.1 - 16-Feb-2022
+* Fix issue with ActiveSupport 7+ (#415)
+* Switch to GitHub Actions (#414)
+
+= 0.11.0 - 20-Apr-2021
+* Modify the VirtualMachineService#get method to include instance view
+  information
+* Update default ssl_version to TLSv1_2
+* Fix tenants method
+* Handle application/xml exception content-types
+
+= 0.10.0 - 14-May-2020
+* Updated the rest-client dependency to 2.1.0.
+* Updated the azure-signature dependency to 0.3.0.
+* Updated the MetricsService#list_metrics method to use the current API, which
+  had apparently undergone some serious revision since we first implemented it.
+  It now accepts a hash of options, though you may still pass a string for the
+  sake of backwards compatibility. 
+
+= 0.9.15 - 23-Jan-2020
+* The VirtualMachineService#delete_associated_resources now supports deleting
+  attached data disks.
+
+= 0.9.14 - 23-Oct-2019
+* Added the VirtualMachineService#list_by_location method.
+* The VirtualMachineService#vm_operations method now returns a response object
+  instead of nil.
+* The results of the ResourceProviderService#supported? method are now cached.
+* Fixed a bug in the VirtualMachineService#vm_operate method where it wasn't
+  setting the response code.
+* Fixed a bug in the Armrest::Configuration#log= method where it would bomb if
+  you used an object that was neither a string nor a logger instance.
+* Made the requirements for the memoist gem less pessimistic.
+* Some spec updates and general refactoring.
+
+= 0.9.13 - 12-Sep-2018
+* Updated the USGov AD authority endpoint, which was changed by Microsoft recently.
+* Added the timeout option for the Configuration class. This allows you to set
+  the timeout value for all http requests. The default is 60 seconds.
+* Added the get_secret and list_secrets methods to the KeyVaultService class.
+* Added the get method to the VirtualMachineImageService class, plus some
+  internal refactoring
+* Some internal updates for rubocop.
+
+= 0.9.12 - 12-Jul-2018
+* Fixed and updated the ResourceProviderService#list_api_versions method. The
+  previous version was broken and would probably return invalid informtion.
+  It has therefore been altered to require a service name in addition to the
+  namespace so that it can return accurate information.
+* Added the extension, extension_types, and extension_type_versions instance
+  methods to the VirtualMachineImageService class.
+
+= 0.9.11 - 8-May-2018
+* Added the ResourceProviderService#supported? method.
+* Added the Environment.discover singleton method. This will allow you to
+  automatically generate a minimum environment profile based on an endpoint.
+
+= 0.9.10 - 17-Apr-2018
+* Fixed a bug in the TemplateDeploymentService#create method where it would
+  transform template keys that shouldn't be transformed. Individual subclasses
+  can now control this behavior as needed.
+* Updated the addressable dependency to 2.5.0.
+* Updated the docs for the VirtualMachineExtension#list method. That method
+  appears to be working again. It was previously broken on the Azure side.
+
+= 0.9.9 - 6-Apr-2018
+* Changed the default endpoint used for fetching the initial authorization
+  token. It now uses the AD resource ID instead of the resource manager URL.
+
+= 0.9.8 - 14-mar-2018
+* Performance of the VirtualMachineImageService#list_all method has been
+  dramatically improved.
+* Added the StorageAccountService#get_by_url method.
+* Fixed an error message in the StorageAccountService#list_private_images method.
+* Added an error check for invalid ID strings in the
+  ResourceGroupBasedService#get_by_id method.
+* Minor doc updates.
+
+= 0.9.7 - 5-Mar-2018
+* Added get_by_id support for templates and template operations.
+
+= 0.9.6 - 26-Feb-2018
+* Another bugfix for the model generator. From now on all non-alphanumeric
+  characters are automatically converted to an underscore. Thanks go to
+  Robb Manes for the patch.
+
+= 0.9.5 - 22-Jan-2018
+* Fixed a bug in the exception handler for the StorageAccount#all_blobs
+  method and the StorageAccountService#get_private_images method.
+* Added the Azure::Armrest::Storage::ManagedStorageHelper::ManagedDisk
+  class. This should now be the preferred approach for getting raw
+  blob information, as it is much more efficient.
+
+= 0.9.4 - 29-Nov-2017
+* Fixed the VirtualMachineService#delete_associated_resources to handle VM's
+  backed by managed storage, as well as VM's with a private IP.
+* Added HDInsight service classes. Thanks go to Tyler Gregory for the PR.
+* Updated README and VirtualMachineService documentation.
+
+= 0.9.3 - 2-Nov-2017
+* Fixed an issue in the get_by_id and delete_by_id methods where an invalid
+  request string could be generated. This primarily affected the
+  TemplateDeploymentService#delete_associated_resources method.
+
+= 0.9.2 - 31-Oct-2017
+* Fixed a bug in the StorageAccountService#list_private_images method. It
+  now accepts an option to skip accessor definitions.
+* Fixed a caller bug that caused tests to fail on Windows.
+* Fixed a bug where an argument to a sleep call could be a string by mistake.
+* Fixed issues with continuation results for list methods in the
+  StorageAccount model class.
+* The json dependency restriction was loosened to 2.anything.
+* The nokogiri dependency was removed. We now rely on Hash#from_xml courtesy
+  of activesupport, which we were already using.
+
+= 0.9.1 - 9-Oct-2017
+* Fixed an issue where hash properties that contain a '$' sign would fail
+  when we attempted to convert them to model objects. They are now converted
+  to underscores.
+
+= 0.9.0 - 6-Oct-2017
+* Bump nokogiri to at least 1.8.1 to avoid security warnings.
+* Adds the 'skip_attribute_definitions' flag on all azure armrest models. This
+  allows us to significantly reduce memory and increase speed within internal
+  methods that generate lots of intermediate objects. Thanks go to Nick LaMuro
+  for this work.
+
+= 0.8.4 - 2-Oct-2017
+* Logging bug fix in StorageAccount#all_blobs method.
+* Modified the StorageAccountService#list_all_private_image method. It now
+  automatically skips over containers labeled "bootdiagnostics".
+* Relaxed the nokogiri dependency in the gemspec because of incessant CVE's.
+* Updated the parallel gem dependency.
+* The ResourceGroupBasedService#get_by_id method is now case insensitive.
+
+= 0.8.3 - 22-Sep-2017
+* Most underlying requests will now automatically retry in certain
+  circumstances. Specifically, 409, 429 and most 50x errors will now
+  sleep and retry three times (by default) before giving up since
+  these errors are usually transient.
+* Fixed an error handling bug in the StorageAccount#all_blobs method.
+* Added the Configuration#max_retry accessor.
+* Added the ArmrestCollection#next_link method (part of refactoring).
+* The ArmrestService#wait method now takes an optional interval parameter.
+* Refactored the ManagedStorageHelper#get_blob_raw method. It now does a better
+  job of waiting for, and releasing, the lock on the file.
+* Some refactoring for speed, memory and the removal of duplicate code. Thanks
+  go to Nick LaMuro for the patches.
+* General refactoring of the StorageAccountService class with regards to
+  passing configuration information.
+
+= 0.8.2 - 30-Aug-2017
+* The :list and :list_all methods for the ResourceProviderService class now
+  accepts a filter.
+* The :list_all method for the TemplateDeploymentService class now accepts
+  a filter.
+* The get_blob_raw method was refactored into a module that both the
+  Storage::SnapshotService and Storage::DiskService classes now mixin.
+  Thanks go to Jerry Keselman for the PR.
+* Added the :exists? method to the ResourceGroupService class.
+* Added the :exists? method to the TemplateDeploymentService class.
+* The filter for private image collection now ignores case. This addresses
+  an issue where private images would not be picked up for regions
+  within Canada or India.
+* Added the KeyVaultService class.
+* The :create method in any ResourceGroupBasedService class will now
+  automatically camelize hash keys for you.
+
+= 0.8.1 - 4-Aug-2017
+* Fixed a bug in the DiskService#get_blob_raw method that affected you if you
+  used :start_byte + :length options. Thanks go to Jerry Keselman for the spot.
+* The :filter option for ResourceGroupBaseService#list_all now ignores case
+  when testing against string values.
+
+= 0.8.0 - 20-Jul-2017
+* The StorageAccount#create_blob and StorageAccount#create_blob_snapshot methods
+  were heavily revamped and now return a ResponseHeaders object.
+* Added support for storage file services to the Storage model, so you can
+  now create, delete or query files or directories on storage accounts.
+* Added the list_all instance method to the VirtualMachineImageService class.
+  Thanks go to Tyler Gregory for the patch.
+* Added the ArmestService#list_locations method. This returns an array of
+  Location objects. The ArmrestService#locations method still returns just
+  an array of strings, but is now deprecated.
+* The StorageAccount#all_blobs method now accepts an options argument.
+
+= 0.7.5 - 27-Jun-2017
+* Added the ContainerService service class.
+* Added the StorageAccount#access_key accessor. If set, this is now used as
+  the default since "properties.key1" is no longer supported by Azure.
+* Added predefined Environment's for China and Germany.
+* The nokogiri dependency was updated to 1.7.2.
+
+= 0.7.4 - 9-Jun-2017
+* Added the BaseModel#subscription_id method.
+* Improved the underlying regex for BaseModel#resource_group.
+* Added the StorageAccount#update_blob_properties method.
+* The object returned by StorageAccountService#list_private_images now
+  includes the resource_group.
+* The default storage_api_version was updated to 2016-05-31.
+
+= 0.7.3 - 11-May-2017
+* Added guards against ECONNREFUSED and TimeoutException for the
+  StorageAccountService#get_private_images and StorageAccount#all_blobs
+  methods. These errors are sporadic and could cause some of our inner
+  looping methods to fail. Consequently, they are now just logged with
+  a warning and skipped.
+
+= 0.7.2 - 26-Apr-2017
+* Added the Storage::DiskService#get_blob_raw method. This is similar to the
+  StorageAccount#get_blob_raw method, but works for managed disks.
+* Added the :managed_disk?, :size (alias :flavor) and :operating_system
+  (alias :os) methods to the VirtualMachine model for convenience.
+
+= 0.7.1 - 11-Apr-2017
+* Fixed a bug in the BaseModel#to_json method. It now handles arrays of
+  model objects properly.
+* Updated the Nokogiri dependency to 1.7.x due to a CVE.
+
+= 0.7.0 - 24-Mar-2017
+* Altered the TemplateDeploymentService#get_template method to only return
+  a plain JSON string instead of a model object. The previous approach was
+  doomed to fail eventually given the less structured nature of templates.
+* Minor buff to our dynamic model creation, as it will now handle spaces
+  in key names. We thought the .underscore method already did this (it doesn't).
+* Added the Storage::DiskService, Storage::ImageService and
+  Storage::SnapshotService service classes. These all relate to managed disks.
+* Some spec cleanup for the logger tests which were failing on Windows.
+* Updates to our test matrix, including the addition of Ruby 2.4.0.
+
+= 0.6.1 - 28-Feb-2017
+* Replaced the cache_method gem with the memoist gem because cache_method was
+  causing problems when this gem was used within a Rails app. Thanks go to
+  Jason Frey for spotting the issue and the patch. This change is mostly
+  seamless, but it does mean that the ResourceProviderService methods are
+  no longer cached for only 24 hours.
+
+= 0.6.0 - 6-Jan-2017
+* Revamped the Role::AssignmentService and Role::DefinitionService which were
+  mostly broken. These are now each subclassed from a RoleService base class
+  that implements various scope-based methods.
+* The Insights::MetricsService class was updated to add the list_metrics and
+  list_definitions methods. These use the newer API from Azure that is easier
+  to use, but returns fewer definitions.
+* Added the ResourceProviderService#registered? method.
+* Some rubocop updates.
+
+= 0.5.2 - 22-Dec-2016
+* The Configuration#hash method, which is used internally to cache auth
+  tokens, was modified to include the environment name. This prevents
+  conflicts for apps in mixed environments.
+
+= 0.5.1 - 21-Dec-2016
+* The Configuration#subscription_id= method does not validate or fetch
+  provider information if the argument is nil or blank.
+
+= 0.5.0 - 20-Dec-2016
+* Added the Azure::Armrest::Environment class. The Configuration#environment
+  option now takes an Environment instance. There are two predefined instances
+  that you can use - Public or USGovernment. The default is Public.
+* Fixed bugs caused by altering the base_url. This affected the tags and
+  tenants methods, as well as the VirtualMachineService#series method.
+
+= 0.4.2 - 19-Dec-2016
+* Added the delete_by_id method, so you can now delete by ID string.
+* Added the TemplateDeploymentService#delete_associated_resources method.
+
+= 0.4.1 - 16-Dec-2016
+* The Configuration#environment accessor was added. As of this release you
+  can specify 'usgov' as an option to the constructor, and the appropriate
+  resource and authority endpoints will be used instead of the public ones.
+* Added the #authority_url and #resource_url accessors to the Configuration
+  class. Use wisely.
+* The Armrest::COMMON constant was removed because the resource isn't actually
+  constant. Instead use the authority_url or resource_url methods. This was
+  really only meant for internal use anyway.
+* Added the Armrest::USGOV_RESOURCE and Armrest::USGOV_AUTHORITY constants.
+* Fixed a bug in the VirtualMachineService#delete_associated_resources where
+  the method would fail if you requested network security group deletion but
+  there was no associated network security group.
+* Fixed an issue in the ArmrestService#poll method where a 202 response might
+  not actually have a body. In that case, it is treated as success.
+* Fixed a logic bug in the ArmrestService#wait method, and added the option
+  to specify 0 (infinity) for the wait time.
+* Added the ArmrestService#log method, and the Configuration.log= method now
+  automatically converts the argument to a Logger instance if it's not already.
+* The ArmrestService#base_url method was altered to include subscription
+  information.
+
+= 0.4.0 - 8-Dec-2016
+* The Configuration constructor no longer requires a subscription ID. However,
+  the presence of a subscription ID is still required for almost all Service
+  classes. The verification now happens later, within the Service constructor.
+* Added the SubscriptionService class. This does not require a subscription ID
+  in advance, so you can get a list of subscriptions for a tenant.
+* The Configuration#subscription_id= and Configuration#proxy= writer methods
+  now have custom implementations.
+
+= 0.3.13 - 30-Nov-2016
+* Fixed the Billing::Usage model class name.
+* Updated the Billing::Usage#list method so that it returns an ArmrestCollection
+  instead of a plain array. In addition, it now supports an :all option so
+  that you don't have to deal with continuation tokens.
+
+= 0.3.12 - 15-Nov-2016
+* Added the Insights::DiagnosticService class.
+* Added the get_from_vm and get_os_disk methods to StorageAccountService.
+* Added the delete_associated_resources method to VirtualMachineService.
+* The output of StorageAccount#blob_properties method now includes the blob
+  name and the container name.
+* Added a service_name accessor to the ArmrestService base class.
+* The list_all method in StorageAccountService now supports a filter.
+
+= 0.3.11 - 8-Nov-2016
+* Fixed the regex for the internal method parse_id_string, making the
+  get_associated_resource method more robust.
+* The get_associated_resource now supports VM extensions.
+* The list and list_all methods for the ResourceService class now
+  optionally return all possible results instead of capping at 1000.
+* Some updates for codeclimate-test-reporter, simplecov.
+
+= 0.3.10 - 28-Oct-2016
+* Added the ResourceGroupBasedService#get_associated_resource method. This
+  method will retrieve a service or subservice resource based on an ID string.
+
+= 0.3.9 - 19-Oct-2016
+* The StorageAccount#delete_blob method now returns a ResponseHeaders object
+  instead of true.
+* The Configuration.clear_caches method now additionally clears the
+  CacheMethod config store.
+
+= 0.3.8 - 7-Oct-2-16
+* Added more robust exception wrapping, now mostly based on http error code.
+* Refactored the internal fetch_providers method so that it uses our own
+  service class method call, which is cached.
+* Added the TemplateDeploymentService#get_template method.
+* The :list and :list_all methods in the ResourceGroupBasedService class now
+  automatically perform pagination.
+* Replaced our custom inspect with the one provided by pretty_print.
+* Added the :response_code and :response_headers accessors to the BaseModel
+  class. All individual objects and collections now set these.
+* Modified our :poll method to check the :response_code, and to try the
+  :location attribute if :azure_asyncoperation isn't found.
+* Updated the :create documentation for the StorageAccountService class.
+
+= 0.3.7 - 15-Sep-2016
+* Modified the private image listing code in the StorageAccountService class
+  to skip over storage accounts when we cannot get a key.
+
+= 0.3.6 - 13-Sep-2016
+* Added the poll and wait methods to the ArmrestService base class. These
+  are meant for use with asynchronous operations, e.g. create and delete.
+* All methods that returned a plain array now return an ArmrestCollection
+  object instead. This is a subclass of Array, but includes header and
+  skip token information.
+* Added the ArmrestCollection.create_from_response method. This creates
+  and returns a collection based on a JSON response and a model type.
+* Minor update to the ApiException#to_s method so that includes a bit
+  more information.
+
+= 0.3.5 - 11-Aug-2016
+* When we added subscription ID validation in 0.3.2 we forgot to set proxy
+  information first. That has been fixed.
+
+= 0.3.4 - 9-Aug-2016
+* Modified the StorageAccount#blobs and StorageAccount#containers method. Both
+  now accept a hash of options that you can use to modify the results. Also,
+  both now automatically handle continuation tokens to collect all results.
+* The ResourceGroupBasedService#delete method now returns a ResponseHeaders
+  object instead of nil. Furthermore, it will raise an error on a 204 response
+  which indicates that the resource wasn't actually found.
+* Added the Network::LoadBalancerService and Network::InboundNatService classes.
+* Added the Network::RouteService and Network::RouteTableService classes.
+
+= 0.3.3 - 1-Aug-2016
+* Added the :max_threads configuration option. This is used internally wherever
+  the Parallel gem is used.
+* The default number of threads when used with VCR is reduced to 1.
+
+= 0.3.2 - 21-Jul-2016
+* The subscription ID is now automatically validated in the
+  Azure::Armrest::Configuration constructor.
+* Added a Hakiri badge to the README.
+* There have been some minor updates to the dependencies to enforce
+  more recent versions of external gems, as suggested by Hakiri,
+  for security reasons.
+* The ResourceGroupBasedService#list_all method (and all subclasses)
+  now supports an optional hash that can be used to automatically
+  filter result sets.
+
+= 0.3.1 - 14-Jul-2016
+* Now uses the parallel gem and thread pools for those few methods where
+  we were using threaded methods internally in order to reduce errors
+  caused by too many requests.
+* Updated the rest-client dependency to 2.0.0 now that it has been released.
+* Updated travis.yml to only test 2.2.5 and 2.3.1 for now. Partly due to a
+  change in the activesupport gem.
+* One rspec fix for 2.3.x.
+
+= 0.3.0 - 28-Jun-2016
+* The configuration handling has been moved into its own class called
+  Azure::Armrest::Configuration. You can call this explicitly using :new,
+  or you can still use ArmrestService.configure.
+* The :subscription_id option for configuration is no longer optional.
+  The logic for automatically fetching the first active subscription ID
+  that could be found has been dropped.
+* Added the Billing::UsageService class.
+* Added a TooManyRequests exception.
+* Added support for pretty_print.
+* Added the addressable gem as a dependency, as it internally replaces
+  the uri standard library. Calls to rest-client are still encoded, but
+  now using Addressable::URI.
+* StorageAccountService no longer does account type validation.
+* Added the StorageAccountService#list_all_private_images method.
+
+= 0.2.10 - 15-Sep-2016
+* Backported PR #213 (skip over storage accounts that don't have keys).
+
+= 0.2.9 - 25-Aug-2016
+* Backported PR #211 (exception class updates and specs).
+
+= 0.2.8 - 22-Jul-2016
+* Backported PR #188 (add list_all_private_images method).
+* Backported PR #194 (updated .travis.yml).
+
+= 0.2.7 - 20-Jun-2016
+* All internal calls to rest-client are now explicitly URI.encoded.
+
+= 0.2.6 - 9-May-2016
+* If no subscription is provided, the internal method for fetching a default
+  subscription ID will now skip over tenant/subscription mismatches.
+* Removed the hard-coded api-version string for both TemplateDeploymentService
+  and StorageAccountService.
+* Because there was an underlying REST API change for storage account keys for
+  api-version strings set at 2016-01-01 or later, the list_account_key_objects
+  and regenerate_account_key_objects methods were added. These return model
+  objects instead of plain hashes. The list_account_keys and regenerate_account_keys
+  methods still behave as before.
+
+= 0.2.5 - 11-Apr-2016
+* Fixed a bug in the custom exception handler where the error code and
+  message were not set properly.
+
+= 0.2.4 - 4-Apr-2016
+* The ArmrestCollection#skip_token method was renamed to "continuation_token".
+* Added the ArmrestService.log and ArmrestService.log= methods. These are just
+  thin wrappers around RestClient.log and RestClient.log= methods.
+* Fixed the StorageAccount#table_data method, and added support for
+  continuation tokens.
+* Fixed a bug in the BaseModel's method generation code where an all-caps
+  key would create strange results.
+* Dealt with a bug in the StorageAccountService#create method caused by
+  a potentially empty response.
+
+= 0.2.3 - 29-Mar-2016
+* Fixed the VirtualMachineImageService class.
+* Added an Insights::MetricsService class and support models.
+* Added a singleton method to clear some internal class variable caches that
+  we use. This is primarily meant for testing.
+* Added a customs collection class that will eventually be used for better
+  handling of skip tokens (paging).
+* Updated the Insights::Event class, modifying the list method's prototype,
+  and now it returns our custom collection class.
+
+= 0.2.2 - 16-Mar-2016
+* Fixed a potential name collision issue for nested objects.
+
+= 0.2.1 - 15-Mar-2016
+* The ssl_version and ssl_verify options are now supported by, and
+  automatically passed on to, StorageAccount model objects.
+* Added the get_blob_raw method to get at raw blob data. Use wisely.
+* Nested model objects are now named based on the attribute name rather
+  than anonymous.
+
+= 0.2.0 - 10-Mar-2016
+* The Armrest.configure method now supports the :ssl_verify and :ssl_version
+  options. By default, the ssl_version option is set to TLSv1 instead of
+  using older defaults used by Ruby's net-http library.
+
+= 0.1.3 - 7-Mar-2016
+* StorageAccount model objects now have their proxy value automatically
+  set to whatever the proxy was set to in the configuration argument
+  for StorageAccountService.
+
+= 0.1.2 - 2-Mar-2016
+* When selecting the appropriate api version string, we now reject dates
+  that are ahead of the current date.
+* Some minor rubocop cleanup.
+
+= 0.1.1 - 26-Feb-2016
+* Added proxy support for both the storage model and main configure method.
+* Added the SqlDatabaseService and SqlServerService classes.
+* Added the ResourceGroupBaseedSubservice abstract base class.
+* When fetching a default subscription, enabled subscriptions are chosen
+  before disabled subscriptions. If only a disabled subscription can be
+  found then a warning is issued.
+* You can now create blobs and blob snapshots with the storage model.
+  Thanks go to Alexandre Lamandé and Nguyễn Tấn Tài and for their patches.
+* Some internal refactoring to use our own helper methods for various
+  RestClient methods, and other cleanup.
+
+= 0.1.0 - 26-Jan-2015
+* Refactored the ArmrestService class api_version and provider handling.
+* The ArmrestService class no longer uses "preview" api versions by default.
+* Added RBAC service classes.
+
+= 0.0.9 - 17-Dec-2015
+* Added AlertService and EventService classes.
+* Added tables, table_info and table_data methods to the StorageAccount model.
+* Updates to the README.
+
+= 0.0.8 - 10-Nov-2015
+* Added the list_private_images method to the StorageAccountService class.
+* Added the list_all method to the ResourceGroupService class.
+* Removed the EventService class for now. It did not actually work, and will
+  eventually be re-implemented as part of a group of Insights classes.
+* Added a .to_h and .to_hash method for the BaseModel class.
+
+= 0.0.7 - 5-Nov-2015
+* Refactored our BaseModel class so that it no longer uses Delegate or OpenStruct.
+* Added more methods to the StorageAccount model, and modified methods so that
+  any options are always the last argument.
+* Bug fix for the StorageAccount#all_blobs method.
+
+= 0.0.6 - 23-Oct-2015
+* Defined a custom == method for the BaseModel class.
+* The TemplateDeployment#properties.outputs now returns a hash.
+* Temporarily use a BaseModel hash ref instead of a method name due to name
+  collision with ManageIQ until a general solution is worked out.
+
+= 0.0.5 - 21-Oct-2015
+* The VirtualMachineService#series method now returns VirtualMachineSize
+  objects instead of a raw hash.
+* Fixed a bug in the Network::IpAddress::Service class.
+* Cleaned up some spec warnings.
+
+= 0.0.4 - 19-Oct-2015
+* All get/list/list_all methods now return wrapper class instances, e.g.
+  a call to VirtualMachineService#get will return a VirtualMachine instance.
+  These provide a nice OpenStruct wrapper so you can use methods instead
+  of hash references if desired.
+* A custom StorageAccount class was added that implements methods for
+  gathering blob information.
+* Most service classes now inherit from ResourceGroupBasedService, which
+  provides a common set of methods typically used for various services.
+* Now re-raises RestClient exceptions as exceptions that we have defined.
+* The VirtualMachineImage class was overhauled and is now working properly.
+* The azure-signature, nokogiri and activesupport dependencies were added.
+
+= 0.0.3 - 13-Oct-2015
+* Bug fixes for VirtualMachineImageService class.
+* Reorganized and updated SubnetService class.
+* Some updates to the BaseModel in prep for JSON wrapper classes.
+* Added NetworkSecurityGroupService and IpAddressService classes.
+
+= 0.0.2 - 23-Sep-2015
+* Revamped class names. Now use "Service" instead of "Manager".
+* Several new service classes added, updated, and refactored.
+* All service classes now take and store configuration information as the
+  first argument to ensure distinct credentials.
+* Added Bill Wei as author.
+
+= 0.0.1 - 13-Aug-2015
+* Initial release

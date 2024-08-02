@@ -1,0 +1,4 @@
+Style/GlobalVars:
+  AllowedVariables:
+  - $vcloud_log
+  - $vim_log

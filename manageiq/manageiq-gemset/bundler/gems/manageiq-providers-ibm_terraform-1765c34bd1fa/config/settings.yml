@@ -1,0 +1,19 @@
+:ems:
+  :ems_ibm_terraform:
+    :blacklisted_event_names: []
+    :event_handling:
+      :event_groups:
+:ems_refresh:
+  :ibm_terraform_configuration:
+    :refresh_interval: 15.minutes
+:http_proxy:
+  :ibm_terraform:
+    :host:
+    :password:
+    :port:
+    :user:
+:workers:
+  :worker_base:
+    :queue_worker_base:
+      :ems_refresh_worker:
+        :ems_refresh_worker_ibm_terraform: {}

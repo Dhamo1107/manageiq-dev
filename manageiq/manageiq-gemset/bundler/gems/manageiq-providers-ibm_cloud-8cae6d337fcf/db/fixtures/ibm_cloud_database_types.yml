@@ -1,0 +1,17 @@
+---
+small:
+  :name: small
+  :memory: 10737418240
+  :vcpu: 3
+medium:
+  :name: medium
+  :memory: 42949672960
+  :vcpu: 10
+large:
+  :name: large
+  :memory: 85899345920
+  :vcpu: 20
+extra-large:
+  :name: extra-large
+  :memory: 118111600640
+  :vcpu: 28

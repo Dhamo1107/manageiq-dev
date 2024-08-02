@@ -1,0 +1,1 @@
+../bundler/gems/amazon_ssa_support-83d721e9d13c/amazon_ssa_support.gemspec

@@ -1,0 +1,40 @@
+---
+:ems:
+  :ems_oracle_cloud:
+    :additional_regions: {}
+    :blacklisted_event_names:
+    - com.oraclecloud.resourcequeryservice.searchresources
+    - com.oraclecloud.identitysignon.federatedinteractiveloginattempt
+    - serviceapi
+    :disabled_regions: []
+    :event_handling:
+      :event_groups:
+:ems_refresh:
+  :oracle_cloud:
+    :refresh_interval: 15.minutes
+  :oke:
+    :streaming_refresh: true
+    :chunk_size: 1_000
+    :inventory_collections:
+      :saver_strategy: batch
+:http_proxy:
+  :oracle_cloud:
+    :host:
+    :password:
+    :port:
+    :user:
+:log:
+  :level_oracle: info
+:workers:
+  :worker_base:
+    :event_catcher:
+      :event_catcher_oracle_cloud:
+        :poll: 20.seconds
+      :event_catcher_oracle_oke:
+        :poll: 20.seconds
+    :queue_worker_base:
+      :ems_metrics_collector_worker:
+        :ems_metrics_collector_worker_oracle_cloud: {}
+      :ems_refresh_worker:
+        :ems_refresh_worker_oracle_cloud: {}
+        :ems_refresh_worker_oracle_oke: {}

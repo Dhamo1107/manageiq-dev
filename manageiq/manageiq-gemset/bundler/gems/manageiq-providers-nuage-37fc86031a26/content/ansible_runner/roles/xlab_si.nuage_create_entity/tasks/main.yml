@@ -1,0 +1,13 @@
+---
+- local_action:
+    module: nuage_vspk
+    auth: '{{ nuage_auth }}'
+    type: '{{ entity_type }}'
+    parent_type: '{{ parent_type }}'
+    parent_id: '{{ parent_id }}'
+    state: present
+    properties: '{{ attributes }}'
+  register: result
+- set_stats:
+    data:
+      created_entity: "{{ result }}"

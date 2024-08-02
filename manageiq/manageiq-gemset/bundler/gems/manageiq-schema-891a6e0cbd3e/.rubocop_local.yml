@@ -1,0 +1,10 @@
+AllCops:
+  Exclude:
+  - 'spec/dummy/**/*'
+
+Rails/ApplicationRecord:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  AllowedMethods:
+  - update_all

@@ -1,0 +1,20 @@
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/linux_block_device-0.2.1/ext/linux_block_device
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20230912-934-j7zruc.rb extconf.rb
+creating Makefile
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/linux_block_device-0.2.1/ext/linux_block_device
+make DESTDIR\= clean
+rm -f 
+rm -f linux_block_device.so  *.o  *.bak mkmf.log .*.time
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/linux_block_device-0.2.1/ext/linux_block_device
+make DESTDIR\=
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o linux_block_device.o -c linux_block_device.c
+rm -f linux_block_device.so
+gcc -shared -o linux_block_device.so linux_block_device.o -L. -L/usr/lib64 -L. -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,--no-as-needed -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/linux_block_device-0.2.1/ext/linux_block_device
+make DESTDIR\= install
+/usr/bin/mkdir -p . ./.gem.20230912-934-t9095/linux_block_device
+exit > .sitearchdir.-.linux_block_device.time
+/usr/bin/install -c -m 0755 linux_block_device.so ./.gem.20230912-934-t9095/linux_block_device

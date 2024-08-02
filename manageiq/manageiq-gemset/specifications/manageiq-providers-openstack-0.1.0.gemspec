@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-openstack-c18e073b6552/manageiq-providers-openstack.gemspec

@@ -1,0 +1,14 @@
+= render :partial => "layouts/flash_msg"
+- unless session[:host_items].nil?
+  %h3
+    = n_("Host", "Hosts", session[:host_items].length)
+    = _('Selected')
+  = _('Click on a Host to fetch its settings')
+  %table.admittable{:height => '75'}
+    %tbody
+      %tr
+        %td
+          - if session[:host_items]
+            - @embedded = true
+            = render :partial => 'layouts/gtl'
+= react('HostEditForm', {:ids => (@host.id ? [@host.id] : session[:host_items])})

@@ -1,0 +1,56 @@
+begin
+  require 'ostruct'
+  require 'disk/MiqDisk'
+
+  require 'logger'
+  $log = Logger.new(STDERR)
+  $log.level = Logger::DEBUG
+
+  diskInfo = OpenStruct.new
+  diskInfo.rawDisk = true
+  # diskInfo.fileName = File.join(File. dirname(__FILE__), "dos_mbr.img")
+  # diskInfo.fileName = "/Users/rpo/vmware/Win2K3-EE/Windows Server 2003 Enterprise Edition-flat.vmdk"
+  # diskInfo.fileName = "/Users/rpo/vmware/knoppixDVM/knoppixDVM.vmdk"
+  # diskInfo.fileName = "/volumes/SCRATCH/VMs/VirtualPC/VHDFixedFAT32TwoPart/VHDFixedFAT32.vhd"
+
+  diskInfo.fileName = "/dev/xvdf"
+  # diskInfo.fileName = "./Win2k3R2EE.vhd"
+  # diskInfo.fileName = "./Windows XP Pro 2.vhd"
+
+  disk = MiqDisk.getDisk(diskInfo)
+
+  unless disk
+    puts "Failed to open disk"
+    exit(1)
+  end
+
+  puts "Disk type: #{disk.diskType}"
+  puts "Disk partition type: #{disk.partType}"
+  puts "Disk block size: #{disk.blockSize}"
+  puts "Disk start LBA: #{disk.lbaStart}"
+  puts "Disk end LBA: #{disk.lbaEnd}"
+  puts "Disk start byte: #{disk.startByteAddr}"
+  puts "Disk end byte: #{disk.endByteAddr}"
+
+  parts = disk.getPartitions
+
+  exit(0) unless parts
+
+  i = 1
+  parts.each do |p|
+    puts "\nPartition #{i}:"
+    puts "\tDisk type: #{p.diskType}"
+    puts "\tPart partition type: #{p.partType}"
+    puts "\tPart block size: #{p.blockSize}"
+    puts "\tPart start LBA: #{p.lbaStart}"
+    puts "\tPart end LBA: #{p.lbaEnd}"
+    puts "\tPart start byte: #{p.startByteAddr}"
+    puts "\tPart end byte: #{p.endByteAddr}"
+    i += 1
+  end
+
+  disk.close
+rescue => err
+  puts err.to_s
+  puts err.backtrace.join("\n")
+end

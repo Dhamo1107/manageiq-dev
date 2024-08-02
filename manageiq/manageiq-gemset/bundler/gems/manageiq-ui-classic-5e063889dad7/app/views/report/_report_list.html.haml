@@ -1,0 +1,41 @@
+#report_list_div
+  - if @sb[:active_accord] == :reports
+    - if @in_a_form
+      = render :partial => 'form'
+    - elsif @report
+      = render :partial => "layouts/flash_msg"
+
+      = render :partial => 'shared/report_chart_and_html', :locals => {:chart => @render_chart, :html => @html, :report => @report}
+
+    - elsif x_active_tree == :reports_tree && x_node.split('-').length <= 4
+      - nodes = x_node.split('-')
+      - if (nodes.length == 1 && @sb[:rpt_menu].blank?) || (nodes.length == 2 && @sb[:rpt_menu][nodes[1].to_i][1].blank?) || (nodes.length == 4 && @sb[:rpt_menu][nodes[1].to_i].present? && @sb[:rpt_menu][nodes[1].to_i][1][nodes[3].to_i][1].blank?)
+        = render :partial => 'layouts/info_msg', :locals => {:message => _("No Reports available.")}
+        - if @flash_array.present?
+          = render :partial => "layouts/flash_msg"
+      - else
+        = render :partial => "layouts/flash_msg"
+        = react('ReportList', :nodes => nodes, 
+                              :reportMenu => @sb[:rpt_menu], 
+                              :reportTitle => reports_group_title, 
+                              :reportDetails => @sb[:rep_details])
+    - elsif x_active_tree == :reports_tree
+      - if @report.nil? && x_node.split('-').length >= 6
+        = render :partial => 'layouts/warn_msg', :locals => {:message => _("No records found for this report")}
+      - else
+        #rep_tabs
+          %ul.nav.nav-tabs{'role' => 'tablist'}
+            = miq_tab_header('report_info', @sb[:active_tab]) do
+              = _('Report Info')
+            %li
+            = miq_tab_header('saved_reports', @sb[:active_tab]) do
+              = _('Saved Reports')
+          .tab-content
+            = miq_tab_content('report_info', @sb[:active_tab]) do
+              = render :partial => "report_info"
+            = miq_tab_content('saved_reports', @sb[:active_tab]) do
+              = render :partial => "report_saved_reports"
+        :javascript
+          miq_tabs_init('#rep_tabs', '/report/rep_change_tab');
+    - else
+      = render :partial => 'layouts/info_msg', :locals => {:message => _("Choose a Report to view from the menus on the left.")}

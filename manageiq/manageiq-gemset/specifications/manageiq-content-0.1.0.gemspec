@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-content-c22bfa652df5/manageiq-content.gemspec

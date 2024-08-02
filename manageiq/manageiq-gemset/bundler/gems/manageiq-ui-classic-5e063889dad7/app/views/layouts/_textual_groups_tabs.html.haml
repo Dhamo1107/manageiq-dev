@@ -1,0 +1,3 @@
+- tab_id = "textual_summary#{tab_id ? "_" + tab_id : ""}"
+%div{:id => tab_id}
+  = react('TextualSummaryWrapper', {:options => @options, :summary => process_textual_info(textual_group_list, @record)})

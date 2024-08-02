@@ -1,0 +1,9 @@
+---
+commands:
+hooks:
+load_paths:
+  bundler-inject:
+  - "/var/www/miq/vmdb/.bundle/plugin/gems/bundler-inject-2.0.0/lib"
+plugin_paths:
+  bundler-inject: "/var/www/miq/vmdb/.bundle/plugin/gems/bundler-inject-2.0.0"
+sources:

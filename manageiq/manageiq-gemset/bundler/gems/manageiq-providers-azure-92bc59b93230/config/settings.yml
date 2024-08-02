@@ -1,0 +1,98 @@
+---
+:ems:
+  :ems_azure:
+    :api_versions:
+      :availability_set: "2017-12-01"
+      :ip_address: "2017-11-01"
+      :load_balancer: "2017-11-01"
+      :managed_image: "2017-12-01"
+      :network_interface: "2017-11-01"
+      :network_security_group: "2017-11-01"
+      :resource: "2017-08-01"
+      :resource_group: "2017-08-01"
+      :resource_provider: "2016-09-01"
+      :route_table: "2018-03-01"
+      :storage_account: "2017-10-01"
+      :storage_disk: "2017-03-30"
+      :template_deployment: "2017-08-01"
+      :virtual_machine: "2017-12-01"
+      :virtual_network: "2017-11-01"
+    :blacklisted_event_names:
+      - storageAccounts_listKeys_BeginRequest
+      - storageAccounts_listKeys_EndRequest
+      - deployments_exportTemplate_BeginRequest
+      - deployments_exportTemplate_EndRequest
+    :event_handling:
+      :event_groups:
+        :addition:
+          :critical:
+            - virtualMachines_write_EndRequest
+        :deletion:
+          :critical:
+            - virtualMachines_delete_EndRequest
+        :power:
+          :critical:
+            - virtualMachines_deallocate_EndRequest
+            - virtualMachines_start_EndRequest
+            - virtualMachines_restart_EndRequest
+    :disabled_regions: []
+    :additional_regions: {}
+:ems_refresh:
+  :aks:
+    :streaming_refresh: true
+    :chunk_size: 1_000
+    :inventory_collections:
+      :saver_strategy: batch
+  :azure:
+    # If get_market_images is enabled with no filters, all public images will be added
+    # This will cause performance issues during refresh and at places in the UI where images are listed
+    :get_market_images: true
+    # Optionally collecting private images [Graph refresh only]
+    :get_private_images: true
+    :market_image_urns:
+      - Canonical:UbuntuServer:18_04-lts-gen2:18.04.202209210
+      - Canonical:0001-com-ubuntu-minimal-focal:minimal-20_04-lts:20.04.202210110
+      - MicrosoftWindowsServer:WindowsServer-HUB:2016-Datacenter-HUB:2016.127.20170630
+      - MicrosoftWindowsServer:WindowsServer:2019-Datacenter:2019.0.20190410
+      - MicrosoftWindowsServer:WindowsServer:2022-datacenter:20348.887.220806
+      - OpenLogic:CentOS:7.3:7.3.20170517
+      - OpenLogic:CentOS:7.5:7.5.201808150
+      - OpenLogic:CentOS:8_5:8.5.2022012100
+      - RedHat:RHEL:7.3:7.3.2017051117
+      - RedHat:RHEL:8_5:8.5.2022061001
+      - RedHat:RHEL:9_0:9.0.2022090613
+    # Collecting disk information on unmanaged VM's slows down the refresh.
+    :get_unmanaged_disk_space: true
+    # Limit of threads we spawn to speed up API queries [Graph refresh only]
+    :parallel_thread_limit: 25
+    :targeted_api_collection_threshold: 500
+    # Not fetching resources and templates of deployments unless deployment changed [Graph refresh only]
+    :enabled_deployments_caching: true
+    :inventory_collections:
+      # Strategy for saving, another allowed is batch, doing batch SQL queries [Graph refresh only]
+      :saver_strategy: default
+  :azure_network:
+    :inventory_collections:
+      :saver_strategy: default
+:http_proxy:
+  :azure:
+    :host:
+    :password:
+    :port:
+    :user:
+:log:
+  :level_azure: warn
+:workers:
+  :worker_base:
+    :event_catcher:
+      :event_catcher_azure:
+        :poll: 15.seconds
+      :event_catcher_azure_aks:
+        :poll: 15.seconds
+    :queue_worker_base:
+      :ems_metrics_collector_worker:
+        :ems_metrics_collector_worker_azure: {}
+      :ems_refresh_worker:
+        :ems_refresh_worker_azure: {}
+        :ems_refresh_worker_azure_aks: {}
+        :ems_refresh_worker_azure_network: {}

@@ -1,0 +1,120 @@
+#!/usr/bin/ruby
+root_dir = File.expand_path("..", __dir__)
+Dir.chdir(root_dir) { require 'bundler/setup' }
+$LOAD_PATH << File.join(root_dir, "lib")
+
+require 'optparse'
+
+cmd_name      = File.basename($PROGRAM_NAME)
+log_level     = nil
+log_max_size  = nil
+log_to_stderr = false
+work_dir      = ENV['WORK_DIR'] || '/opt/ssa_container'
+#
+# Process command line args.
+#
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{cmd_name} [options]"
+
+  opts.on('--log-to-stderr', "Log to STDERR in addition to the log file") do
+    log_to_stderr = true
+  end
+  opts.on('-l', '--log-level ARG', "The log level: DEBUG|INFO|WARN|ERROR|FATAL") do |v|
+    raise OptionParser::ParseError, "Unrecognized log level: #{v}" unless /^(DEBUG|INFO|WARN|ERROR|FATAL)$/i =~ v
+    log_level = v
+  end
+  opts.on('--log-max-size ARG', "Roll to S3 after log file exceeds this size") do |v|
+    raise OptionParser::ParseError, "Max log size must be >= 256" if v.to_i < 256
+    log_max_size = v
+  end
+
+  begin
+    opts.parse!(ARGV)
+  rescue OptionParser::ParseError => perror
+    $stderr.puts cmd_name + ": " + perror.to_s
+    $stderr.puts
+    $stderr.puts opts.to_s
+    exit 1
+  end
+end
+
+require 'yaml'
+aws_args = YAML.load(File.read("#{work_dir}/config.yml"))
+
+require 'amazon_ssa_support/rolling_s3_logger'
+log_filename  = File.join(work_dir, "extract.log")
+log_max_size  = (log_max_size || aws_args[:log_max_size] || 1_048_576).to_i
+$log = AmazonSsaSupport::RollingS3Logger.new(log_filename, 1, log_max_size, log_to_stderr)
+$log.level    = (log_level || aws_args[:log_level] || "INFO").to_s.upcase
+$log.progname = File.basename(__FILE__, ".*")
+at_exit do
+  $log.roll
+  Dir.glob("#{log_filename}*").each { |f| File.delete(f) }
+end
+
+require 'aws-sdk-ec2'
+require 'aws-sdk-sqs'
+require 'aws-sdk-s3'
+require 'amazon_ssa_support'
+require 'manageiq/gems/pending'
+
+begin
+  #
+  # Get info and args associated with this extractor instance.
+  #
+  im = AmazonSsaSupport::InstanceMetadata.new
+  extractor_id                  = im.metadata('instance-id')
+  extractor_doc                 = im.data('dynamic/instance-identity/document')
+  region                        = YAML.load(extractor_doc)["region"]
+  aws_args[:extractor_id]       = extractor_id
+  aws_args[:region]             = region
+  aws_args[:log_prefix]       ||= AmazonSsaSupport::DEFAULT_LOG_PREFIX
+  aws_args[:heartbeat_prefix] ||= AmazonSsaSupport::DEFAULT_HEARTBEAT_PREFIX
+  timeout                       = aws_args[:agent_idle_period] || AmazonSsaSupport::DEFAULT_REQUEST_TIMEOUT
+
+  $log.formatter = lambda do |severity, datetime, progname, msg|
+    "#{severity} [#{datetime.utc.iso8601(6)}#{extractor_id && " #{extractor_id}"}] -- #{progname}: #{msg}\n"
+  end
+  $log.aws_args = aws_args
+
+  aws_args[:ec2] = Aws::EC2::Resource.new(:region => region)
+  aws_args[:sqs] = Aws::SQS::Resource.new(:region => region)
+  aws_args[:s3]  = Aws::S3::Resource.new(:region => region)
+
+  #
+  # Initialize and enter the heartbeat loop.
+  #
+  ehb = AmazonSsaSupport::SsaHeartbeat.new(aws_args)
+  ehb.start_heartbeat_loop
+
+  #
+  # Initialize the extractor and enter the main extraction loop.
+  #
+  eqe = AmazonSsaSupport::SsaQueueExtractor.new(aws_args)
+
+  $log.info("Agent starts to process requests ...")
+
+  begin
+    exit_code = eqe.extract_loop(timeout)
+
+    #
+    # Determine how we should exit.
+    #
+    case exit_code
+    when :exit
+      $log.info("Exiting")
+      ehb.stop_heartbeat_loop
+    when :reboot
+      $log.info("Rebooting")
+      ehb.stop_heartbeat_loop
+      aws_args[:ec2].instance(extractor_id).stop
+    when :shutdown
+      $log.info("Shutting down")
+      ehb.stop_heartbeat_loop
+      aws_args[:ec2].instance(extractor_id).stop
+    end
+  rescue => err
+    $log.error("ERROR: #{err}")
+    $log.error(err.backtrace.join("\n"))
+  end
+end

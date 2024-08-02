@@ -1,0 +1,42 @@
+#!/usr/bin/ruby
+$stdout.sync = true
+
+require "shellwords"
+require "yaml"
+
+ENV["RAILS_ENV"] ||= "development"
+RAILS_ENV = ENV["RAILS_ENV"]
+
+ENV["NODE_ENV"] ||= RAILS_ENV
+NODE_ENV = ENV["NODE_ENV"]
+
+APP_PATH          = File.expand_path("../", __dir__)
+NODE_MODULES_PATH = File.join(APP_PATH, "node_modules")
+WEBPACK_CONFIG    = File.join(APP_PATH, "config/webpack/#{NODE_ENV}.js")
+
+unless File.exist?(WEBPACK_CONFIG)
+  puts "Webpack configuration not found."
+  puts "Please run bundle exec rails webpacker:install to install webpacker"
+  exit!
+end
+
+# HACK: Check if --openssl-legacy-provider flag is available and use it.
+#   If nodejs is compiled with openssl 3, then this flag is available
+#   If nodejs is compiled with openssl 1.1, then this flag is not available
+#     and will fail if we hardcode it into NODE_OPTIONS
+#
+# This can be removed once we upgrade webpack as then we don't need the
+# flag anymore.
+has_legacy_openssl = system('node --help | grep -qs "\\--openssl-legacy-provider"')
+node_options = "--max_old_space_size=4096"
+node_options << " --openssl-legacy-provider" if has_legacy_openssl
+
+newenv  = {
+  "NODE_PATH"    => NODE_MODULES_PATH.shellescape,
+  "NODE_OPTIONS" => node_options
+}
+cmdline = ["yarn", "run", "webpack", "--config", WEBPACK_CONFIG] + ARGV
+
+Dir.chdir(APP_PATH) do
+  exec newenv, *cmdline
+end

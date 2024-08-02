@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-lenovo-93ffabc5acb4/manageiq-providers-lenovo.gemspec

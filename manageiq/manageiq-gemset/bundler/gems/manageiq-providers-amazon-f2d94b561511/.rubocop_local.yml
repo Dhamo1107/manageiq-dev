@@ -1,0 +1,7 @@
+Style/GlobalVars:
+  AllowedVariables:
+  # Loggers
+  - $aws_log
+  - $log
+Lint/RescueException:
+  Enabled: false

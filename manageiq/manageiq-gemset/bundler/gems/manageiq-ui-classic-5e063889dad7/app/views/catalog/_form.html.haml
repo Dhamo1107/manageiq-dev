@@ -1,0 +1,18 @@
+- catalog_tab_labels, catalog_condition = catalog_tab_edit_configuration(@edit[:new])
+.miq_custom_tab_wrapper
+  = react('MiqCustomTab', {:containerId => 'catalog-tabs-edit',
+                          :tabLabels => catalog_tab_labels,
+                          :type => 'CATALOG_EDIT'})
+
+#catalog-tabs-edit.miq_custom_tabs_container
+  = catalog_tab_content(:basic) do
+    = render :partial => "form_basic_info"
+  - if catalog_condition[:detail]
+    = catalog_tab_content(:detail) do
+      = render :partial => "form_details_info"
+  - if catalog_condition[:resource]
+    = catalog_tab_content(:resource) do
+      = render :partial => "form_resources_info"
+  - if catalog_condition[:request]
+    = catalog_tab_content(:request) do
+      = render :partial => "form_request_info"

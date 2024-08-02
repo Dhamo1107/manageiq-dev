@@ -1,0 +1,44 @@
+---
+en:
+  product:
+    name: ManageIQ
+  advanced_settings:
+    menu_order:
+    - networking
+    - dbbackup
+    - dbdump
+    - dbrestore
+    - app_config
+    - db_replication
+    - log_config
+    - failover_monitor
+    - httpdauth
+    - extauth_opts
+    - key_gen
+    - evmstop
+    - evmstart
+    - restart
+    - shutdown
+    - summary
+    - quit
+    networking: Configure Network
+    dbbackup: Create Database Backup
+    dbdump: Create Database Dump
+    dbrestore: Restore Database From Backup
+    app_config: Configure Application
+    db_replication: Configure Database Replication
+    log_config: Logfile Configuration
+    failover_monitor: Control Application Database Failover Monitor
+    httpdauth: Configure External Authentication (httpd)
+    extauth_opts: Update External Authentication Options
+    evmstop: Stop EVM Server Processes
+    key_gen: Generate Custom Encryption Key
+    evmstart: Start EVM Server Processes
+    restart: Restart Appliance
+    shutdown: Shut Down Appliance
+    summary: Summary Information
+    quit: Quit
+  database_admin:
+    local: Local file
+    sample_url:
+      nfs: nfs://host.mydomain.com/exported/my_exported_folder/db.backup

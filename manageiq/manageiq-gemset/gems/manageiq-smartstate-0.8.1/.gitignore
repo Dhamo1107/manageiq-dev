@@ -1,0 +1,19 @@
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/.rubocop-*
+/spec/reports/
+/tmp/
+
+/log/
+*.log
+
+# rspec failure tracking
+.rspec_status
+
+# Komodo project file
+manageiq-smartstate.komodoproject

@@ -1,0 +1,70 @@
+---
+:ems:
+  :ems_vmware:
+    :blacklisted_event_names: []
+    :event_handling:
+      :event_groups:
+        :addition:
+          :critical:
+        :power:
+          :critical:
+    :concurrent_requests:
+      :historical: 100
+      :hourly: 250
+      :realtime: 100
+:ems_refresh:
+  :vmware_tanzu:
+    :refresh_interval: 24.hours
+    :streaming_refresh: true
+    :chunk_size: 1_000
+    :inventory_collections:
+      :saver_strategy: batch
+  :vmware_cloud:
+    :get_public_images: false
+  :vmwarews:
+    :refresh_interval: 24.hours
+    :update_poll_interval: 1.second
+:http_proxy:
+  :vmware_cloud:
+    :host:
+    :password:
+    :port:
+    :user:
+  :vmwarews:
+    :host:
+    :password:
+    :port:
+    :user:
+:log:
+  :level_vcloud: info
+  :level_vim: warn
+:workers:
+  :worker_base:
+    :event_catcher:
+      :event_catcher_vmware:
+        :flooding_monitor_enabled: true
+        :poll: 1.seconds
+        :ems_event_max_wait: 60
+        :rails_worker: true
+      :event_catcher_vmware_cloud:
+        :poll: 15.seconds
+        :duration: 10.seconds
+        :capacity: 50
+        :amqp_port: 5672
+        :amqp_heartbeat: 30
+        :amqp_recovery_attempts: 4
+      :event_catcher_vmware_tanzu: {}
+    :queue_worker_base:
+      :ems_metrics_collector_worker:
+        :ems_metrics_collector_worker_vmware: {}
+      :ems_operations_worker:
+        :ems_operations_worker_vmware:
+          :memory_threshold: 1.gigabytes
+      :ems_refresh_worker:
+        :ems_refresh_worker_vmware: {}
+        :ems_refresh_worker_vmware_cloud: {}
+        :ems_refresh_worker_vmware_cloud_network: {}
+        :ems_refresh_worker_vmware_tanzu: {}
+:prototype:
+  :ems_vmware:
+    :allow_direct_hosts: false

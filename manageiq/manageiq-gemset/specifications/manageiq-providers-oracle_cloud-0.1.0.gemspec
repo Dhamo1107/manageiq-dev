@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-oracle_cloud-2036978e352a/manageiq-providers-oracle_cloud.gemspec

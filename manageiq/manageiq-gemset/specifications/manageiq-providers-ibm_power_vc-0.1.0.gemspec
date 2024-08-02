@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-ibm_power_vc-006cb28dbcc2/manageiq-providers-ibm_power_vc.gemspec

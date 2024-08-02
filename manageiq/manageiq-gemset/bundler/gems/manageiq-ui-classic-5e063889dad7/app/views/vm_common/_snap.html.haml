@@ -1,0 +1,7 @@
+- @angular_form = true
+= render :partial => "layouts/flash_msg"
+%h3
+  = _('Snapshot information')
+= react('VmSnapshotForm',
+        :url => "#{api_resource_path(@record)}/snapshots",
+        :redirect => url_for(:action => @lastaction, :id => @record.id))

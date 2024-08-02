@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-consumption-52ac73eb96ea/manageiq-consumption.gemspec

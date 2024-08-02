@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-ansible_tower-5e5fb1b6fbe5/manageiq-providers-ansible_tower.gemspec

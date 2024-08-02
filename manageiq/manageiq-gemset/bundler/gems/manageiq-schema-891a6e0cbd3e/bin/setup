@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z "$CI" ]; then
+  bundle update --jobs=3
+fi
+
+cp -n spec/dummy/config/database.{tmpl.,}yml
+bundle exec rake spec:setup

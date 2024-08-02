@@ -1,0 +1,8 @@
+#ns_list_div
+  - if !@in_a_form
+    - unless @version_messages.blank?
+      - @version_messages.each do |msg|
+        = render :partial => 'layouts/info_msg', :locals => {:message => msg}
+    = render :partial => 'datastore_list', :locals => {:type => MiqAeClassHelper::DATASTORE_TYPES[:list], :data => @grid_data}
+  - else
+    = datastore_form(@ae_ns, @sb, :list)

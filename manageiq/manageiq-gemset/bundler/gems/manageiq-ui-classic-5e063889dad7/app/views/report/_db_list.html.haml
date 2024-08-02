@@ -1,0 +1,20 @@
+- if x_active_tree == :db_tree
+  - is_dashboard = @sb[:nodes].nil? || (@sb[:nodes] && @sb[:nodes].length == 1)
+  - is_group = @sb[:nodes] && @sb[:nodes].last == "g" && !@in_a_form
+  - is_widget = @sb[:nodes].length == 3 && @sb[:nodes][1] == "g_g" && !@in_a_form
+  - if is_dashboard || is_group || is_widget
+    = render :partial => "layouts/flash_msg"
+    = react('DbList', {:nodes => @sb[:nodes],
+                        :activeTree => @sb[:active_tree],
+                        :dashboards => @db_nodes,
+                        :groups => @miq_groups && @miq_groups.sort_by(&:description),
+                        :widgets => @widgetsets && @widgetsets.sort_by { |widgetset| widgetset.name.downcase }},
+                        :initialData => @db_data)
+  - elsif @dashboard && !@in_a_form
+    = render :partial => "layouts/flash_msg"
+    = render :partial => "db_show", :locals => {:widget => @dashboard}
+  - elsif @in_a_form
+    - if @edit[:new][:dashboard_order]
+      = render :partial => "db_seq_form"
+    - else
+      = render :partial => "db_form"

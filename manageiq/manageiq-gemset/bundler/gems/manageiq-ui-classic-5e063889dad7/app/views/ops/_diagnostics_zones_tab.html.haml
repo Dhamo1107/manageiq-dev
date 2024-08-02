@@ -1,0 +1,5 @@
+- if @sb[:active_tab] == "diagnostics_zones"
+  - if @zones
+    = render :partial => "layouts/flash_msg"
+    = react('SettingsZone', {:initialData => settings_zone_list(@zones, my_zone_name)})
+  %div{:style => "padding-bottom: 20px"}

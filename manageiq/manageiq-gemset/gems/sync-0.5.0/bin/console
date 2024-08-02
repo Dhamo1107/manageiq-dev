@@ -1,0 +1,7 @@
+#!/usr/bin/ruby
+
+require "bundler/setup"
+require_relative "../lib/sync"
+
+require "irb"
+IRB.start(__FILE__)

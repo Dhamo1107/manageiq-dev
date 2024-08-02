@@ -1,0 +1,72 @@
+---
+:ems:
+  :ems_ovirt:
+    :consoles:
+      :html5_enabled: false
+    :resolve_ip_addresses: true
+    :inventory:
+      :read_timeout: 1.hour
+      :open_timeout: 1.minute
+    :service:
+      :read_timeout: 1.hour
+      :open_timeout: 1.minute
+    :blacklisted_event_names: []
+    :event_handling:
+      :event_groups:
+        :console:
+          :critical:
+          - VM_CONSOLE_CONNECTED
+          - VM_CONSOLE_DISCONNECTED
+          - VM_SET_TICKET
+          - VM_SET_TICKET_FAILED
+        :network:
+          :critical:
+          - network.create.end
+          - network.delete.end
+          - network.update.end
+          - subnet.create.end
+          - subnet.delete.end
+          - subnet.update.end
+          - floatingip.create.end
+          - floatingip.delete.end
+          - floatingip.update.end
+          - network.floating_ip.allocate
+          - network.floating_ip.deallocate
+          - network.floating_ip.associate
+          - network.floating_ip.disassociate
+          - router.create.end
+          - router.delete.end
+          - router.interface.create
+          - router.interface.delete
+          - router.update.end
+          - security_group.create.end
+          - security_group.delete.end
+          - security_group.update.end
+    :connection_manager:
+      :purge_interval: 1.hour
+:http_proxy:
+  :rhevm:
+    :host:
+    :password:
+    :port:
+    :user:
+:ems_refresh:
+  :ovirt:
+    :pipeline: 40
+    :connections: 10
+    :allow_targeted_refresh: true
+  :redhat_network:
+    :is_admin: false
+:log:
+  :level_rhevm: info
+:workers:
+  :worker_base:
+    :event_catcher:
+      :event_catcher_ovirt:
+        :poll: 15.seconds
+    :queue_worker_base:
+      :ems_metrics_collector_worker:
+        :ems_metrics_collector_worker_ovirt: {}
+      :ems_refresh_worker:
+        :ems_refresh_worker_ovirt: {}
+        :ems_refresh_worker_ovirt_network: {}

@@ -1,0 +1,3 @@
+- url = @ems.persisted? ? ems_clouds_path(@ems) : ems_clouds_path
+
+= react('ProviderForm', :redirect => ems_clouds_path, :kind => 'cloud', :title => ui_lookup(:model => 'ManageIQ::Providers::CloudManager'))

@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+  - cron: '0 0 * * 0'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version:
+        - '2.7'
+        - '3.0'
+        rails-version:
+        # rails 6.1 supports ruby >= 2.5
+        - '6.1'
+        include:
+        # rails 5.2 (EOL 6/22) supports ruby < 2.7 (2.6 EOL 3/22)
+        - ruby-version: '2.5'
+          rails-version: '5.2'
+        # rails 6.0 (security EOL 6/23?) supports ruby < 2.8 (2.7 EOL 3/23?;)
+        - ruby-version: '2.6'
+          rails-version: '6.0'
+        - ruby-version: '2.7'
+          rails-version: '6.0'
+    services:
+      postgres:
+        image: manageiq/postgresql:10
+        env:
+          POSTGRESQL_USER: root
+          POSTGRESQL_PASSWORD: smartvm
+          POSTGRESQL_DATABASE: inventory_refresh_dummy_test
+        options: --health-cmd pg_isready --health-interval 2s --health-timeout 5s --health-retries 5
+        ports:
+        - 5432:5432
+    env:
+      TEST_RAILS_VERSION: ${{ matrix.rails-version }}
+      PGHOST: localhost
+      PGPASSWORD: smartvm
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+      timeout-minutes: 30
+    - name: Prepare tests
+      run: bundle exec rake spec:setup
+    - name: Run tests
+      run: bundle exec rake
+    - name: Report code coverage
+      if: ${{ github.ref == 'refs/heads/master' && matrix.ruby-version == '2.7' && matrix.rails-version == '6.1' }}
+      continue-on-error: true
+      uses: paambaati/codeclimate-action@v3.0.0

@@ -1,0 +1,24 @@
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/memory_buffer-0.1.0/ext/memory_buffer
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20230912-934-f45p20.rb extconf.rb
+creating Makefile
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/memory_buffer-0.1.0/ext/memory_buffer
+make DESTDIR\= clean
+rm -f 
+rm -f memory_buffer.so  *.o  *.bak mkmf.log .*.time
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/memory_buffer-0.1.0/ext/memory_buffer
+make DESTDIR\=
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o memory_buffer.o -c memory_buffer.c
+memory_buffer.c: In function 'mb_create_aligned':
+memory_buffer.c:22:10: warning: unused variable 'rc' [-Wunused-variable]
+  int     rc;
+          ^~
+rm -f memory_buffer.so
+gcc -shared -o memory_buffer.so memory_buffer.o -L. -L/usr/lib64 -L. -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,--no-as-needed -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/memory_buffer-0.1.0/ext/memory_buffer
+make DESTDIR\= install
+/usr/bin/mkdir -p . ./.gem.20230912-934-veidp2/memory_buffer
+exit > .sitearchdir.-.memory_buffer.time
+/usr/bin/install -c -m 0755 memory_buffer.so ./.gem.20230912-934-veidp2/memory_buffer

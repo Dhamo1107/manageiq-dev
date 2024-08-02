@@ -1,0 +1,115 @@
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/ovirt-engine-sdk-4.4.1/ext/ovirtsdk4c
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20230912-934-9uwqmh.rb extconf.rb
+checking for xml2-config... yes
+checking for curl-config... yes
+creating Makefile
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/ovirt-engine-sdk-4.4.1/ext/ovirtsdk4c
+make DESTDIR\= clean
+rm -f 
+rm -f ovirtsdk4c.so  *.o  *.bak mkmf.log .*.time
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/ovirt-engine-sdk-4.4.1/ext/ovirtsdk4c
+make DESTDIR\=
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ov_error.o -c ov_error.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ov_http_client.o -c ov_http_client.c
+ov_http_client.c:216:29: warning: excess elements in array initializer
+         .reserved = { NULL, NULL }
+                             ^~~~
+ov_http_client.c:216:29: note: (near initialization for 'ov_http_client_type.function.reserved')
+ov_http_client.c: In function 'ov_http_client_prepare_handle':
+ov_http_client.c:1001:47: warning: passing argument 2 of 'rb_hash_foreach' from incompatible pointer type [-Wincompatible-pointer-types]
+         rb_hash_foreach(request_ptr->headers, ov_http_client_add_header, (VALUE) headers);
+                                               ^~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/ruby/internal/scan_args.h:35,
+                 from /usr/include/ruby/ruby.h:44,
+                 from /usr/include/ruby.h:38,
+                 from ov_http_client.c:17:
+/usr/include/ruby/internal/intern/hash.h:33:29: note: expected 'int (*)(VALUE,  VALUE,  VALUE)' {aka 'int (*)(long unsigned int,  long unsigned int,  long unsigned int)'} but argument is of type 'int (*)(VALUE,  VALUE,  struct curl_slist **)' {aka 'int (*)(long unsigned int,  long unsigned int,  struct curl_slist **)'}
+ void rb_hash_foreach(VALUE, int (*)(VALUE, VALUE, VALUE), VALUE);
+                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ov_http_request.o -c ov_http_request.c
+ov_http_request.c:75:29: warning: excess elements in array initializer
+         .reserved = { NULL, NULL }
+                             ^~~~
+ov_http_request.c:75:29: note: (near initialization for 'ov_http_request_type.function.reserved')
+ov_http_request.c: In function 'ov_http_request_define':
+ov_http_request.c:347:5: warning: 'rb_cData' is deprecated: by: rb_cObject.  Will be removed in 3.1. [-Wdeprecated-declarations]
+     ov_http_request_class = rb_define_class_under(ov_module, "HttpRequest", rb_cData);
+     ^~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/ruby/internal/core.h:27,
+                 from /usr/include/ruby/ruby.h:26,
+                 from /usr/include/ruby.h:38,
+                 from ov_http_request.c:17:
+/usr/include/ruby/internal/core/rdata.h:169:1: note: declared here
+ rb_cData(void)
+ ^~~~~~~~
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ov_http_response.o -c ov_http_response.c
+ov_http_response.c:54:29: warning: excess elements in array initializer
+         .reserved = { NULL, NULL }
+                             ^~~~
+ov_http_response.c:54:29: note: (near initialization for 'ov_http_response_type.function.reserved')
+ov_http_response.c: In function 'ov_http_response_define':
+ov_http_response.c:187:5: warning: 'rb_cData' is deprecated: by: rb_cObject.  Will be removed in 3.1. [-Wdeprecated-declarations]
+     ov_http_response_class = rb_define_class_under(ov_module, "HttpResponse", rb_cData);
+     ^~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/ruby/internal/core.h:27,
+                 from /usr/include/ruby/ruby.h:26,
+                 from /usr/include/ruby.h:38,
+                 from ov_http_response.c:17:
+/usr/include/ruby/internal/core/rdata.h:169:1: note: declared here
+ rb_cData(void)
+ ^~~~~~~~
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ov_http_transfer.o -c ov_http_transfer.c
+ov_http_transfer.c:51:29: warning: excess elements in array initializer
+         .reserved = { NULL, NULL }
+                             ^~~~
+ov_http_transfer.c:51:29: note: (near initialization for 'ov_http_transfer_type.function.reserved')
+ov_http_transfer.c: In function 'ov_http_transfer_define':
+ov_http_transfer.c:83:5: warning: 'rb_cData' is deprecated: by: rb_cObject.  Will be removed in 3.1. [-Wdeprecated-declarations]
+     ov_http_transfer_class = rb_define_class_under(ov_module, "HttpTransfer", rb_cData);
+     ^~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/ruby/internal/core.h:27,
+                 from /usr/include/ruby/ruby.h:26,
+                 from /usr/include/ruby.h:38,
+                 from ov_http_transfer.c:17:
+/usr/include/ruby/internal/core/rdata.h:169:1: note: declared here
+ rb_cData(void)
+ ^~~~~~~~
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ov_module.o -c ov_module.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ov_string.o -c ov_string.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ov_xml_reader.o -c ov_xml_reader.c
+ov_xml_reader.c:75:29: warning: excess elements in array initializer
+         .reserved = { NULL, NULL }
+                             ^~~~
+ov_xml_reader.c:75:29: note: (near initialization for 'ov_xml_reader_type.function.reserved')
+ov_xml_reader.c: In function 'ov_xml_reader_define':
+ov_xml_reader.c:433:5: warning: 'rb_cData' is deprecated: by: rb_cObject.  Will be removed in 3.1. [-Wdeprecated-declarations]
+     ov_xml_reader_class = rb_define_class_under(ov_module, "XmlReader", rb_cData);
+     ^~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/ruby/internal/core.h:27,
+                 from /usr/include/ruby/ruby.h:26,
+                 from /usr/include/ruby.h:38,
+                 from ov_xml_reader.c:17:
+/usr/include/ruby/internal/core/rdata.h:169:1: note: declared here
+ rb_cData(void)
+ ^~~~~~~~
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ov_xml_writer.o -c ov_xml_writer.c
+ov_xml_writer.c:69:29: warning: excess elements in array initializer
+         .reserved = { NULL, NULL }
+                             ^~~~
+ov_xml_writer.c:69:29: note: (near initialization for 'ov_xml_writer_type.function.reserved')
+ov_xml_writer.c: In function 'ov_xml_writer_string':
+ov_xml_writer.c:184:12: warning: initialization of 'long unsigned int' from 'void *' makes integer from pointer without a cast [-Wint-conversion]
+     return rb_funcall(ptr->io, STRING_ID, 0, NULL);
+            ^~~~~~~~~~
+ov_xml_writer.c:184:12: note: (near initialization for 'rb_funcall_args[0]')
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -I/usr/include/libxml2    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o ovirtsdk4c.o -c ovirtsdk4c.c
+rm -f ovirtsdk4c.so
+gcc -shared -o ovirtsdk4c.so ov_error.o ov_http_client.o ov_http_request.o ov_http_response.o ov_http_transfer.o ov_module.o ov_string.o ov_xml_reader.o ov_xml_writer.o ovirtsdk4c.o -L. -L/usr/lib64 -lcurl -lxml2 -lz -llzma -lm -ldl -L. -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,--no-as-needed -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/ovirt-engine-sdk-4.4.1/ext/ovirtsdk4c
+make DESTDIR\= install
+/usr/bin/mkdir -p . ./.gem.20230912-934-qkslhk
+exit > .sitearchdir.time
+/usr/bin/install -c -m 0755 ovirtsdk4c.so ./.gem.20230912-934-qkslhk

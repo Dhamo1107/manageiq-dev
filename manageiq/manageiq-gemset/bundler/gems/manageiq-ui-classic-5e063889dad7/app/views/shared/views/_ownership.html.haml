@@ -1,0 +1,19 @@
+= render :partial => "layouts/flash_msg"
+
+%h3
+  = _('Changes')
+-# Possible values for item kind are: vms, templates, services, service_templates
+
+= react('SetOwnershipForm', { :ownershipItems => ownership_items_hash })
+
+%hr
+%h3
+  = _('Affected Items')
+- if @origin_ownership_items.count != @ownershipitems.count
+  %strong
+    = _('Note: Some items might be hidden due to the possibility of an ownership change')
+
+- if @ownershipitems
+  - @embedded = true
+  - @quadicon_no_url = true
+  = render :partial => "layouts/gtl", :locals => {:no_flash_div => true}

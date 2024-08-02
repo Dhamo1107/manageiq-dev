@@ -1,0 +1,5 @@
+- if @domain_overrides && @domain_overrides.count > 1
+  %h3= _('Domain Overrides (by priority)')
+  - @domain_overrides[:prefix] = node_prefix
+  = render :partial => 'datastore_list', :locals => {:type => MiqAeClassHelper::DATASTORE_TYPES[:domain], :data => @domain_overrides}
+  

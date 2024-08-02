@@ -1,0 +1,23 @@
+= Useful manifests
+
+This directory contains Kubernetes manifests useful when working with
+the _KubeVirt_ provider, in particular the
+https://kubernetes.io/docs/concepts/api-extension/custom-resources[custom
+resource definitions] that will be eventually provided by _KubeVirt_,
+but which don't exist yet.
+
+`account-kubernetes.yml`:: Example account with the permissions required
+to work with _KubeVirt_ in _Kubernetes_.
+
+`account-openshift.yml`:: Example account with the permissions required
+to work with _KubeVirt_ in _OpenShift_.
+
+`crd-template.yml`:: Custom resource definition for templates.
+
+`example-template.yml`:: Example template for Linux VM using pvcs and vm presets.
+
+`example-template-windows.yml`:: Example template for Windows VM.
+
+`test-template.yml` :: Example template as accepted by _Kubernetes_.
+
+`working-template.yml` :: Working template which uses _registryDisk_.

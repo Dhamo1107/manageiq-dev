@@ -1,0 +1,32 @@
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/surro-gate-1.0.5/ext/surro-gate
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20230912-934-2vk51a.rb extconf.rb
+checking for sys/epoll.h... yes
+creating Makefile
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/surro-gate-1.0.5/ext/surro-gate
+make DESTDIR\= clean
+rm -f 
+rm -f selector_ext.so  *.o  *.bak mkmf.log .*.time
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/surro-gate-1.0.5/ext/surro-gate
+make DESTDIR\=
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DHAVE_SYS_EPOLL_H    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o selector_ext.o -c selector_ext.c
+selector_ext.c: In function 'SurroGate_Selector_each_ready':
+selector_ext.c:165:64: warning: passing argument 5 of 'rb_block_call' from incompatible pointer type [-Wincompatible-pointer-types]
+   return rb_block_call(scoreboard, rb_intern("each"), 0, NULL, scoreboard_iterate, self);
+                                                                ^~~~~~~~~~~~~~~~~~
+In file included from /usr/include/ruby/ruby.h:38,
+                 from /usr/include/ruby.h:38,
+                 from selector_ext.h:4,
+                 from selector_ext.c:1:
+/usr/include/ruby/internal/iterator.h:48:47: note: expected 'rb_block_call_func_t' {aka 'long unsigned int (*)(long unsigned int,  long unsigned int,  int,  const long unsigned int *, long unsigned int)'} but argument is of type 'VALUE (*)(VALUE,  VALUE,  int,  VALUE *)' {aka 'long unsigned int (*)(long unsigned int,  long unsigned int,  int,  long unsigned int *)'}
+ VALUE rb_block_call(VALUE,ID,int,const VALUE*,rb_block_call_func_t,VALUE);
+                                               ^~~~~~~~~~~~~~~~~~~~
+rm -f selector_ext.so
+gcc -shared -o selector_ext.so selector_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,--no-as-needed -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/surro-gate-1.0.5/ext/surro-gate
+make DESTDIR\= install
+/usr/bin/mkdir -p . ./.gem.20230912-934-l3c7gu/surro-gate
+exit > .sitearchdir.-.surro-gate.time
+/usr/bin/install -c -m 0755 selector_ext.so ./.gem.20230912-934-l3c7gu/surro-gate

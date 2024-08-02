@@ -1,0 +1,7 @@
+#!/usr/bin/ruby
+
+require "bundler/setup"
+require "server_sent_events_client"
+
+require "pry"
+Pry.start

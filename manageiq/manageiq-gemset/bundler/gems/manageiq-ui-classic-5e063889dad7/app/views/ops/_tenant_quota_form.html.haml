@@ -1,0 +1,3 @@
+= render :partial => "layouts/flash_msg"
+= react 'TenantQuotaForm', :recordId => @tenant.try(:id).try(:to_s)
+

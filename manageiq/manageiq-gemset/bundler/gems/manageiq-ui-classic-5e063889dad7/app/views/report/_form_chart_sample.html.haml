@@ -1,0 +1,4 @@
+#chart_sample_div
+  - unless @edit[:new][:graph_type].blank?
+    %fieldset
+      = react('ReportChartWidget',:data => ManageIQ::Reporting::Charting.sample_chart(@edit[:new], settings(:display, :reporttheme)), :id => "my_chart")

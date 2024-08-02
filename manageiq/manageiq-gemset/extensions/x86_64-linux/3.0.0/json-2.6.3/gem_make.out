@@ -1,0 +1,14 @@
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/json-2.6.3/ext/json
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20230912-934-tysyyg.rb extconf.rb
+creating Makefile
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/json-2.6.3/ext/json
+make DESTDIR\= clean
+rm -f  *.o  *.bak mkmf.log .*.time
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/json-2.6.3/ext/json
+make DESTDIR\=
+make: Nothing to be done for 'all'.
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/json-2.6.3/ext/json
+make DESTDIR\= install

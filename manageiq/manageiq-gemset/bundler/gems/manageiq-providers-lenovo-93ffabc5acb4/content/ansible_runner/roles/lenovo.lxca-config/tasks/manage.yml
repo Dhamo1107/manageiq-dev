@@ -1,0 +1,45 @@
+---
+- block:
+  - name: Managing given endpoint
+    pylxca_module:
+      login_user: "{{ lxca_user }}"
+      login_password: "{{ lxca_password }}"
+      auth_url: "{{ lxca_url }}"
+      endpoint_ip: "{{ endpoint_ip }}"
+      user: "{{ user }}"
+      password: "{{ password }}"
+      recovery_password: "{{ recovery_password }}"
+      force: "{{ force }}"
+      storedcredential_id: "{{ storedcredential_id }}"
+      command_options: manage
+    register: rslt_job
+  - debug:
+      var: rslt_job
+  - name: Check manage job submission
+    assert:
+      that:
+        - " 'Success' in rslt_job.msg"
+
+  - name: Polling for Status of Manage Operation
+    pylxca_module:
+      command_options: tasks
+      login_user: "{{ lxca_user }}"
+      login_password: "{{ lxca_password }}"
+      auth_url: "{{ lxca_url }}"
+      id: "{{ rslt_job.result.manageRequestResponse.jobID }}"
+    register: result
+    until: result.result.TaskList[0].percentage == 100
+    retries: 40
+    delay: 15
+
+
+  - debug:
+      var: result.result.TaskList[0].status
+
+  - name: Check manage job completion
+    assert:
+      that:
+        - " 'Complete' in result.result.TaskList[0].status"
+
+  tags:
+    manage

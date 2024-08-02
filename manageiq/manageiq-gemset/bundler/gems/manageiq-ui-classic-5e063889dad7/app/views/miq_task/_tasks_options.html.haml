@@ -1,0 +1,10 @@
+- my_zone = MiqServer.my_server(true).my_zone
+- zones = [["<#{_('All Zones')}>", "all"]] + @tasks_options[:zones].sort.collect { |a| [a == my_zone ? _("%{zone} (current)") % {:zone => a} : a, a] }
+- time_periods = Array(MiqTaskHelper::TASK_TIME_PERIODS.invert).sort_by(&:last).map { |x| [_(x[0]), x[1]] }
+- task_state = [["#{_('All')}", "all"]] + @tasks_options[@tabform][:states].sort.map { |x| [_(x[0]), x[1]] }
+- if @tabform == "tasks_2"
+  = react('SettingsTasksForm', :allTasks => true, :zones => zones,
+  :users => @user_names.sort, :timePeriods => time_periods, :taskStates => task_state, :tz => Time.zone)
+- else
+  = react('SettingsTasksForm', :allTasks => false, :zones => zones,
+  :users => @userid, :timePeriods => time_periods, :taskStates => task_state, :tz => Time.zone)

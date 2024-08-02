@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-vmware-9230773df579/manageiq-providers-vmware.gemspec

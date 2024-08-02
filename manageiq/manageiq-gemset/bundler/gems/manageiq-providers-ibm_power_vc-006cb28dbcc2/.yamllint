@@ -1,0 +1,14 @@
+---
+ignore: |
+  /vendor/**
+  /spec/manageiq/**
+  /spec/vcr_cassettes/**
+  /spec/models/manageiq/providers/ibm_power_vc/cloud_manager/state.yml
+
+extends: relaxed
+
+rules:
+  indentation:
+    indent-sequences: false
+  line-length:
+    max: 120

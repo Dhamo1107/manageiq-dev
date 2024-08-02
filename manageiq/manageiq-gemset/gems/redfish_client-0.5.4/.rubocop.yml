@@ -1,0 +1,48 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - redfish_client.gemspec
+    - Gemfile
+    - Rakefile
+    - bin/**
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/MethodMissing:
+  Exclude:
+    - lib/redfish_client/resource.rb
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+
+Metrics/ClassLength:
+  Max: 500
+
+Metrics/ParameterLists:
+  CountKeywordArgs: false

@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-kubevirt-13616e885936/manageiq-providers-kubevirt.gemspec

@@ -1,0 +1,1 @@
+../bundler/gems/manageiq-providers-google-5553caf39735/manageiq-providers-google.gemspec

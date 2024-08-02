@@ -1,0 +1,39 @@
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/qpid_proton-0.30.0/ext/cproton
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20230912-934-mjizfe.rb extconf.rb
+checking for -lqpid-proton... yes
+checking for proton/engine.h... yes
+checking for proton/message.h... yes
+checking for proton/sasl.h... yes
+checking for proton/messenger.h... yes
+creating Makefile
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/qpid_proton-0.30.0/ext/cproton
+make DESTDIR\= clean
+rm -f 
+rm -f cproton.so  *.o  *.bak mkmf.log .*.time
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/qpid_proton-0.30.0/ext/cproton
+make DESTDIR\=
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DHAVE_PROTON_ENGINE_H -DHAVE_PROTON_MESSAGE_H -DHAVE_PROTON_SASL_H -DHAVE_PROTON_MESSENGER_H    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -DRUBY30 -m64 -o cproton.o -c cproton.c
+cproton.c: In function 'pni_ruby_add_to_registry':
+cproton.c:2444:11: warning: unused variable 'result' [-Wunused-variable]
+     VALUE result = rb_funcall(pni_ruby_get_proton_module(), rb_intern("add_to_registry"), 2, key, value);
+           ^~~~~~
+At top level:
+cproton.c:6725:12: warning: 'check_trace' defined but not used [-Wunused-function]
+ static int check_trace(int x) {
+            ^~~~~~~~~~~
+cproton.c:6714:12: warning: 'check_disposition' defined but not used [-Wunused-function]
+ static int check_disposition(int x) {
+            ^~~~~~~~~~~~~~~~~
+cproton.c:6703:12: warning: 'check_state' defined but not used [-Wunused-function]
+ static int check_state(int x) {
+            ^~~~~~~~~~~
+rm -f cproton.so
+gcc -shared -o cproton.so cproton.o -L. -L/usr/lib64 -L. -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,--no-as-needed -Wl,-z,relro  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby -lqpid-proton  -lm   -lc
+
+current directory: /root/BUILD/manageiq-gemset-16.1.0/gems/qpid_proton-0.30.0/ext/cproton
+make DESTDIR\= install
+/usr/bin/mkdir -p . ./.gem.20230912-934-e4qaxv
+exit > .sitearchdir.time
+/usr/bin/install -c -m 0755 cproton.so ./.gem.20230912-934-e4qaxv

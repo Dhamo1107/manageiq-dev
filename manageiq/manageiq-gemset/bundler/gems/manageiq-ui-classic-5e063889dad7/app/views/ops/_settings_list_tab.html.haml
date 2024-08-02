@@ -1,0 +1,14 @@
+- if @sb[:active_tab] == "settings_list"
+  - if @zones
+    = render(:partial => "layouts/flash_msg")
+    = react('SettingsZone', {:initialData => settings_zone_list(@zones, my_zone_name)})
+  - else
+    - tree_node = x_node
+    - if tree_node == "xx-msc"
+      = render :partial => "schedules_list"
+    - elsif tree_node == "xx-sis"
+      = render :partial => "aps_list"
+    - elsif tree_node.split("-").first == "sis"
+      = render :partial => "ap_show"
+    - elsif tree_node.split("-").first == "msc"
+      = render :partial => "schedule_show"

@@ -1,0 +1,129 @@
+---
+:ems:
+  :ems_amazon:
+    :event_handling:
+      :event_groups:
+        :addition:
+          :critical:
+          - AWS_EC2_Instance_CREATE
+          - AWS_API_CALL_RunInstances
+          - AWS_API_CALL_CreateTags
+        :update:
+          :critical:
+          - AWS_EC2_Instance_UPDATE
+        :deletion:
+          :critical:
+          - AWS_EC2_Instance_DELETE
+          - AWS_API_CALL_TerminateInstances
+        :power:
+          :critical:
+          - AWS_EC2_Instance_running
+          - AWS_EC2_Instance_shutting-down
+          - AWS_EC2_Instance_stopped
+          - EC2_Instance_State_change_Notification_running
+          - EC2_Instance_State_change_Notification_shutting_down
+          - EC2_Instance_State_change_Notification_stopped
+          - EC2_Instance_State_change_Notification_stopping
+          - EC2_Instance_State_change_Notification_terminated
+          - EC2_Instance_State_change_Notification_pending
+          - AWS_API_CALL_StopInstances
+          - AWS_API_CALL_StartInstances
+    :blacklisted_event_names:
+      - ConfigurationSnapshotDeliveryCompleted
+      - ConfigurationSnapshotDeliveryStarted
+      - ConfigurationSnapshotDeliveryFailed
+
+    # disable regions by their keys found in app/models/manageiq/providers/amazon/regions.rb e.g.
+    # - us-gov-west-1
+    :disabled_regions: []
+
+    # add additional regions as found in app/models/manageiq/providers/amazon/regions.rb
+    # :spec-region-1:
+    #   :name: Special Region
+    #   :hostname: ec2.spec-region-1.amazonaws.com
+    #   :description: Super Special Region
+    :additional_regions: {}
+
+    # add additional instance_types as found in app/models/manageiq/providers/amazon/instance_types.rb
+    #  :t9.large:
+    #  :name: t9.large
+    #  :family: General purpose
+    #  :description: T9 Large
+    #  ...
+    :additional_instance_types: {}
+
+    # disable instance_types by their keys found in app/models/manageiq/providers/amazon/instance_types.rb e.g.
+    # - t2.nano
+    :disabled_instance_types: []
+
+    :agent_coordinator:
+      :agent_ami_login_user: centos
+      :agent_ami_name: CentOS Atomic Host 7 x86_64 HVM EBS 1706_01
+      :agent_idle_period: 900
+      :agent_label: smartstate
+      :docker_image: manageiq/amazon-smartstate:latest-petrosian
+      :docker_login_required: false
+      :docker_registry:
+      :heartbeat_interval: 120
+      :log_level: INFO
+      :response_thread_sleep_seconds: 10
+
+:ems_refresh:
+  :ec2:
+    :get_private_images: true
+    :get_shared_images: true
+    :get_public_images: false
+
+    # configure an array of filters to be added to describe_images
+    # see: http://docs.aws.amazon.com/sdkforruby/api/Aws/EC2/Client.html#describe_images-instance_method
+    :public_images_filters:
+      - :name: image-type
+        :values:
+          - machine
+
+    :ignore_terminated_instances: true
+    :inventory_collections:
+      :saver_strategy: batch
+  :ec2_network:
+    :inventory_collections:
+      :saver_strategy: batch
+  :eks:
+    :refresh_interval: 15.minutes
+    :streaming_refresh: true
+    :chunk_size: 1_000
+    :inventory_collections:
+      :saver_strategy: batch
+  :s3:
+    :inventory_collections:
+      :saver_strategy: batch
+  :ec2_ebs_storage:
+    :inventory_collections:
+      :saver_strategy: batch
+:http_proxy:
+  :ec2:
+    :host:
+    :password:
+    :port:
+    :user:
+:log:
+  :level_aws: info
+:workers:
+  :worker_base:
+    :agent_coordinator_worker:
+      :heartbeat_timeout: 30.minutes
+      :poll: 30.seconds
+    :event_catcher:
+      :event_catcher_amazon:
+        :poll: 15.seconds
+      :event_catcher_amazon_eks:
+        :poll: 1.seconds
+    :queue_worker_base:
+      :ems_metrics_collector_worker:
+        :ems_metrics_collector_worker_amazon: {}
+      :ems_refresh_worker:
+        :ems_refresh_worker_amazon: {}
+        :ems_refresh_worker_amazon_eks: {}
+        :ems_refresh_worker_amazon_s3: {}
+:prototype:
+  :amazon:
+    :s3: false

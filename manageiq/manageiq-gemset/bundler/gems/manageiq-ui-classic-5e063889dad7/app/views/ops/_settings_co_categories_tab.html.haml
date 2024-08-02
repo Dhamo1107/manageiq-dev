@@ -1,0 +1,2 @@
+- if @sb[:active_tab] == "settings_tags" && @sb[:active_subtab] == "settings_co_categories"
+  = react('SettingsCompanyCategories', {:initialData => settings_company_categories_list(@categories)})

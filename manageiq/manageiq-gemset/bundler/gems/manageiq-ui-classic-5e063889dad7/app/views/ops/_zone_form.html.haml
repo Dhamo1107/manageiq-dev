@@ -1,0 +1,6 @@
+- unless @editing
+  = render :partial => "layouts/flash_msg"
+  = react "ZoneForm"
+- else
+  = react "ZoneForm", :recordId => @zone.id.to_s
+  

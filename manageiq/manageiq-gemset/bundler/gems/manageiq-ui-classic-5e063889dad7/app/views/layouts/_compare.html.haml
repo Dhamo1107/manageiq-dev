@@ -1,0 +1,44 @@
+= render :partial => "layouts/flash_msg"
+- if @compare.nil?
+  = render :partial => 'layouts/info_msg', :locals => {:message => _("No Records Found.")}
+- else
+  #compare-grid
+    %table.table.table-bordered.table-treegrid.table-expanded
+      %thead
+        %tr
+          - @cols.each do |col|
+            %th
+              %a
+                = col[:name].html_safe
+      %tbody
+        - @rows.each do |row|
+          %tr{'data-parent' => row[:parent], 'data-parent-section' => row[:parent_section], :class => row[:_collapsed] ? 'collapsed' : 'nil',:class => row[:parent] ? 'hidden' : 'nil', 'data-exp-id' => row[:exp_id], 'data-node-parent' => row[:node_parent]}
+            %th.treegrid-node
+              = row[:col0].html_safe
+            - (@cols.length - 1).times do |i|
+              %td
+                = row["col#{i + 1}".to_sym].to_s.html_safe
+    :javascript
+      $('.exp-link').on('click keydown', function (e) {
+        if (e.which === 13 || e.type === 'click') {
+          e.preventDefault();
+          var parentSection=e.currentTarget.classList[1];
+          $(e.currentTarget.firstChild).toggleClass('fa-angle-right fa-angle-down');
+          $(`tr[data-parent-section=${parentSection}]`).toggleClass("hidden");
+          if ($(`tr[data-node-parent=${parentSection}]`).length > 0) {
+            $(`tr[data-node-parent=${parentSection}]`).each(function(index,item){
+              if($(item).hasClass("hidden")===false) 
+                $(item).addClass("hidden");
+            });
+          }
+        }
+      });
+
+- unless @explorer
+  #buttons{:align => 'right'}
+    = link_to(_('Cancel'),
+              {:action => 'compare_cancel'},
+               :class  => 'btn btn-default',
+               :alt    => t = _('Cancel'),
+               :title  => t,
+               :method => :post)

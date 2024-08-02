@@ -1,0 +1,40 @@
+---
+:ems:
+  :ems_google:
+    :blacklisted_event_names: []
+    :event_handling:
+      :event_groups:
+:ems_refresh:
+  :gce:
+    :get_deprecated_images: false
+    :inventory_collections:
+      :saver_strategy: default
+  :gce_network:
+    :inventory_collections:
+      :saver_strategy: default
+  :gke:
+    :streaming_refresh: true
+    :chunk_size: 1_000
+    :inventory_collections:
+      :saver_strategy: batch
+:http_proxy:
+  :gce:
+    :host:
+    :password:
+    :port:
+    :user:
+:log:
+  :level_gce: info
+:workers:
+  :worker_base:
+    :event_catcher:
+      :event_catcher_google:
+        :poll: 15.seconds
+      :event_catcher_google_gke:
+        :poll: 15.seconds
+    :queue_worker_base:
+      :ems_metrics_collector_worker:
+        :ems_metrics_collector_worker_google: {}
+      :ems_refresh_worker:
+        :ems_refresh_worker_google: {}
+        :ems_refresh_worker_google_gke: {}

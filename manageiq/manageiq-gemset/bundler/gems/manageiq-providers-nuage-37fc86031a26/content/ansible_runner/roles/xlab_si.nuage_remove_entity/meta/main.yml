@@ -1,0 +1,10 @@
+galaxy_info:
+  role_name: nuage_remove_entity
+  author: xlab-si
+  company: XLAB d.o.o.
+  license: BSD
+  min_ansible_version: 1.2
+  galaxy_tags:
+    - nuage
+    - vspk
+dependencies: []

@@ -1,0 +1,9 @@
+%div{:id => "ww_#{presenter.widget.id}"}
+  - last_run, next_run = last_next_run(presenter.widget)
+  = react('WidgetWrapper',
+    :widgetId => presenter.widget.id,
+    :widgetType => presenter.widget.content_type,
+    :widgetButtons => presenter.widget_buttons,
+    :widgetLastRun => last_run,
+    :widgetNextRun => next_run,
+    :widgetTitle => _(presenter.widget.title))

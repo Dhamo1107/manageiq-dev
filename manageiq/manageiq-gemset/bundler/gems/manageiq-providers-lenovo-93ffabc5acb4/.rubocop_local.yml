@@ -1,0 +1,13 @@
+Style/GlobalVars:
+  AllowedVariables:
+  # Loggers
+  - $lenovo_log
+  - $log
+
+# Ignores the file at lib folder that needs to have a naming with dashes.
+AllCops:
+  Exclude:
+  - lib/manageiq-providers-lenovo.rb
+  - Rakefile
+  - manageiq-providers-lenovo.gemspec
+  - bin/**

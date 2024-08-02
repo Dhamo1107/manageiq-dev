@@ -1,0 +1,11 @@
+-# Assuming @search_text and other necessary variables are set in the controller
+= render partial: 'layouts/searchbar', locals: { search_text: @search_text }
+
+-# Include other partials as needed, ensuring all required variables are available
+= render partial: 'layouts/quick_search'
+
+= render partial: 'pre_prov', locals: { miq_requests: @miq_requests, edit: @edit }
+
+
+
+

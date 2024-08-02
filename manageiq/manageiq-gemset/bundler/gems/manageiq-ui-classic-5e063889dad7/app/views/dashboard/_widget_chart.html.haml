@@ -1,0 +1,8 @@
+- datum = widget.contents_for_user(current_user).contents
+-# we need to count all charts to be able to display multiple
+-# charts on a dashboard screen
+- WidgetPresenter.chart_data.push(:data => datum)
+- chart_index = WidgetPresenter.chart_data.length - 1
+- chart_data = ManageIQ::Reporting::Charting.deserialized(datum)
+
+= react('DashboardWidget', :data => chart_data, :id => "miq_widgetchart_#{chart_index}".html_safe, :title => widget.title)

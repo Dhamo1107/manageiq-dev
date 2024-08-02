@@ -1,0 +1,11 @@
+#!/usr/bin/ruby
+
+require "bundler/setup"
+require "active_record-virtual_attributes"
+
+# models for local testing
+require "rspec"
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+
+require "irb"
+IRB.start(__FILE__)
